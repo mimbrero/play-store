@@ -121,6 +121,38 @@ public class ApplicationDataTest extends UnitTest {
         print("Tiempo desde la última actualización = " + data.getTimeSinceLastUpdate(oneDayAfter).toDays() + " días");
     }
 
+    // Prueba del método #compareTo()
+    @Test(7)
+    public void compareTo_SecondWithMoreRating_LessThan0() {
+        ApplicationData app1 = MOCK.clone();
+        ApplicationData app2 = MOCK.clone();
+
+        app1.setRating(4);
+        app2.setRating(4.5f);
+
+        assertThat(app1.compareTo(app2) < 0, "app2 debería ser mayor que app1");
+        print("app2 (4.5 de valoración) es mayor que app1 (4 de valoración)");
+    }
+
+    // Prueba del método #compareTo() con misma valoración y número de valoraciones pero distinto número de instalaciones
+    @Test(8)
+    public void compareTo_SameRatingAndReviewsButSecondWithMoreInstalls_GreaterThan0() {
+        ApplicationData app1 = MOCK.clone();
+        ApplicationData app2 = MOCK.clone();
+
+        app1.setRating(4);
+        app2.setRating(4);
+
+        app1.setReviews(900);
+        app2.setReviews(900);
+
+        app1.setInstalls(200_000_000);
+        app2.setInstalls(100_000_000);
+
+        assertThat(app1.compareTo(app2) > 0, "app1 debería ser mayor que app2");
+        print("app1 (200 000 000 instalaciones) es mayor que app2 (100 000 000 instalaciones)");
+    }
+
     public static void main(String[] args) {
         new ApplicationDataTest().init();
     }
