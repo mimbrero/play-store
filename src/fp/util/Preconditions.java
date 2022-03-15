@@ -2,6 +2,10 @@ package fp.util;
 
 public class Preconditions {
 
+    private Preconditions() {
+        // Non instantiable static class
+    }
+
     /**
      * Comprueba que la expresión pasada como argumento se evalúa a {@code true}. En caso contrario, lanzará una
      * {@link IllegalArgumentException}.
@@ -90,22 +94,5 @@ public class Preconditions {
      */
     public static void checkNull(Object toCheck, String exceptionMessage) {
         checkState(toCheck == null, exceptionMessage);
-    }
-
-    /**
-     * Comprueba que el {@link Runnable} pasado como argumento lanza una excepción del tipo especificado.
-     * Esto hace que la excepción no se lance.
-     */
-    @SuppressWarnings("unchecked")
-    public static <T extends Throwable> T assertThrows(Class<T> throwableClass, Runnable runnable) {
-        try {
-            runnable.run();
-        } catch (Throwable throwable) {
-            if (throwableClass.isInstance(throwable)) {
-                return (T) throwable;
-            }
-            throw throwable;
-        }
-        throw new IllegalArgumentException("no se ha lanzado ninguna excepción del tipo dado");
     }
 }
