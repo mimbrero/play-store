@@ -105,7 +105,7 @@ public class ApplicationDataTest extends UnitTest {
 
     // Prueba del método #type(). Saldrá FREE, porque MOCK tiene precio 0
     @Test(5)
-    public void type_PriceIsZero_FREE() {
+    public void getType_PriceIsZero_FREE() {
         ApplicationData data = MOCK;
         assertThat(data.getType() == AppType.FREE, "#getType() debería devolver FREE porque el precio es 0");
         print("Tipo = " + data.getType() + " (el precio es " + data.getPrice() + ").");
@@ -113,7 +113,7 @@ public class ApplicationDataTest extends UnitTest {
 
     // Prueba del método #timeSinceLastUpdate(Temporal)
     @Test(6)
-    public void timeSinceLastUpdate_OneDayAfter_OneDay() {
+    public void getTimeSinceLastUpdate_OneDayAfter_OneDay() {
         ApplicationData data = MOCK;
         LocalDateTime oneDayAfter = LocalDateTime.of(2021, 12, 30, 0, 0);
 
