@@ -222,7 +222,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, category, rating, reviews, size, installs, price, lastUpdated, currentVersion, androidVersion, multiDevice);
     }
 
     @Override
