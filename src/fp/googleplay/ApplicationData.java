@@ -32,13 +32,10 @@ public record ApplicationData(String name, AppCategory category, float rating, i
 
     public ApplicationData {
         Preconditions.checkArgument(!name.isEmpty(), "name no puede estar vacío");
-        Preconditions.checkArgument(rating >= 0, "rating no puede ser negativo");
+        Preconditions.checkArgument(rating >= 0 && rating <= 5, "rating debe estar entre 0 y 5 ambos inclusive");
         Preconditions.checkArgument(reviews >= 0, "reviews no puede ser negativo");
         Preconditions.checkArgument(installs >= 0, "installs no puede ser negativo");
-        Preconditions.checkArgument(price >= 0, "price no puede ser negativo");
         Preconditions.checkArgument(!lastUpdated.isAfter(LocalDateTime.now()), "lastUpdated está en el futuro");
-        Preconditions.checkArgument(!currentVersion.isEmpty(), "currentVersion no puede estar vacío");
-        Preconditions.checkArgument(!androidVersion.isEmpty(), "androidVersion no puede estar vacío");
         Preconditions.checkArgument(
                 installs > 0 || reviews == 0,
                 "el número de valoraciones no puede ser mayor a 0 si el número de instalaciones es 0"
