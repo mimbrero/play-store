@@ -28,6 +28,7 @@ public class ApplicationDataTest extends UnitTest {
     // Tests constructor 1
     //
 
+    // Test correcto del constructor 1
     @Test
     public void constructor1_AllFine() {
         ApplicationData data = new ApplicationData(
@@ -39,6 +40,7 @@ public class ApplicationDataTest extends UnitTest {
         print(data);
     }
 
+    // Prueba con nombre vacío
     @Test(1)
     public void constructor1_EmptyName_ThenIllegalArgumentException() {
         String name = "";
@@ -52,6 +54,7 @@ public class ApplicationDataTest extends UnitTest {
         print("Se ha lanzado la excepción " + exception);
     }
 
+    // Prueba con el parámetro actualización en el futuro (1/1/3000)
     @Test(2)
     public void constructor1_FutureUpdate_ThenIllegalArgumentException() {
         LocalDateTime dateTime = LocalDateTime.of(3000, 1, 1, 0, 0);
@@ -65,6 +68,7 @@ public class ApplicationDataTest extends UnitTest {
         print("Se ha lanzado la excepción " + exception);
     }
 
+    // Prueba con 0 instalaciones y 500 valoraciones
     @Test(3)
     public void constructor1_NoInstallsButThereAreReviews_ThenIllegalArgumentException() {
         int installs = 0;
@@ -97,6 +101,7 @@ public class ApplicationDataTest extends UnitTest {
     // Tests de métodos
     //
 
+    // Prueba del método #type(). Saldrá FREE, porque MOCK tiene precio 0
     @Test(5)
     public void type_PriceIsZero_FREE() {
         ApplicationData data = MOCK;
@@ -105,6 +110,7 @@ public class ApplicationDataTest extends UnitTest {
         print("Tipo = " + data.type() + " (el precio es " + data.price() + ").");
     }
 
+    // Prueba del método #timeSinceLastUpdate(Temporal)
     @Test(6)
     public void timeSinceLastUpdate_OneDayAfter_OneDay() {
         ApplicationData data = MOCK;
