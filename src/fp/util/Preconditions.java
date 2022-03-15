@@ -91,4 +91,18 @@ public class Preconditions {
     public static void checkNull(Object toCheck, String exceptionMessage) {
         checkState(toCheck == null, exceptionMessage);
     }
+
+    /**
+     * Comprueba que el {@link Runnable} pasado como argumento lanza una excepción del tipo especificado.
+     * Esto hace que la excepción no se lance. Si el {@link Runnable} lanza una de otro tipo, se lanza al hilo.
+     */
+    public static void assertThrows(Class<? extends Throwable> throwableClass, Runnable runnable) {
+        try {
+            runnable.run();
+        } catch (Throwable t) {
+            if (!throwableClass.isInstance(t)) {
+                throw t;
+            }
+        }
+    }
 }
