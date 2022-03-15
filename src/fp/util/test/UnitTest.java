@@ -2,8 +2,22 @@ package fp.util.test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public abstract class UnitTest {
+
+    public void init() {
+        TestResults results = new TestResults();
+
+        Arrays.stream(this.getClass().getMethods())
+                .filter(method -> method.isAnnotationPresent(Test.class))
+                .forEachOrdered(method -> this.testMethod(method, results));
+
+        print("\n\n");
+        printSeparator();
+        print("Tests terminados. " + results.getSuccessful() + " correctamente y " + results.getExceptions() + " excepciones capturadas.");
+        printSeparator();
+    }
 
     protected void printSeparator() {
         print("=====================================");
@@ -17,32 +31,19 @@ public abstract class UnitTest {
         System.out.println(o);
     }
 
-    public void init() {
-        int successful = 0;
-        int exceptions = 0;
-
-        for (Method method : this.getClass().getMethods()) {
-            if (!method.isAnnotationPresent(Test.class))
-                continue;
-
-            print("\n\n");
-            printSeparator();
-            print("Test #" + method.getName() + ":");
-            printSeparator();
-
-            try {
-                method.invoke(this);
-                successful++;
-            } catch (InvocationTargetException t) {
-                print("Catched " + t.getTargetException());
-                exceptions++;
-            } catch (IllegalAccessException ignored) {
-            }
-        }
-
+    private void testMethod(Method method, TestResults results) {
         print("\n\n");
         printSeparator();
-        print("Finished running tests. " + successful + " successful tests and " + exceptions + " exceptions catched.");
+        print("Test #" + method.getName() + ":");
         printSeparator();
+
+        try {
+            method.invoke(this);
+            results.incrementSuccessful();
+        } catch (InvocationTargetException t) {
+            print("Capturada " + t.getTargetException() + ".");
+            results.incrementExceptions();
+        } catch (IllegalAccessException ignored) {
+        }
     }
 }
