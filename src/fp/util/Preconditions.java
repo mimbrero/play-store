@@ -94,15 +94,18 @@ public class Preconditions {
 
     /**
      * Comprueba que el {@link Runnable} pasado como argumento lanza una excepción del tipo especificado.
-     * Esto hace que la excepción no se lance. Si el {@link Runnable} lanza una de otro tipo, se lanza al hilo.
+     * Esto hace que la excepción no se lance.
      */
-    public static void assertThrows(Class<? extends Throwable> throwableClass, Runnable runnable) {
+    @SuppressWarnings("unchecked")
+    public static <T extends Throwable> T assertThrows(Class<T> throwableClass, Runnable runnable) {
         try {
             runnable.run();
-        } catch (Throwable t) {
-            if (!throwableClass.isInstance(t)) {
-                throw t;
+        } catch (Throwable throwable) {
+            if (throwableClass.isInstance(throwable)) {
+                return (T) throwable;
             }
+            throw throwable;
         }
+        throw new IllegalArgumentException("no se ha lanzado ninguna excepción del tipo dado");
     }
 }

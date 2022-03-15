@@ -9,15 +9,12 @@ import fp.util.test.UnitTest;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import static fp.util.Preconditions.assertThrows;
 import static fp.util.Preconditions.checkState;
 
 public class ApplicationDataTest extends UnitTest {
 
-    public static void main(String[] args) {
-        new ApplicationDataTest().init();
-    }
-
-    private final ApplicationData MOCK;
+    private final ApplicationData MOCK; // Mock de un ApplicationData para usar en los tests de métodos
 
     public ApplicationDataTest() {
         MOCK = new ApplicationData(
@@ -33,38 +30,52 @@ public class ApplicationDataTest extends UnitTest {
 
     @Test
     public void constructor1_AllFine() {
-        print(MOCK);
+        ApplicationData data = new ApplicationData(
+                "Discord", AppCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
+                0, LocalDateTime.of(2021, 12, 29, 0, 0), "v2.6",
+                "8.0", false
+        );
+
+        print(data);
     }
 
     @Test(1)
     public void constructor1_EmptyName_ThenIllegalArgumentException() {
         String name = "";
 
-        ApplicationData data = new ApplicationData(
-                name, AppCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
-                0, LocalDateTime.now(), "v2.6", "8.0", false
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new ApplicationData(name, AppCategory.COMMUNICATION, 4.7f, 900_000, "200M",
+                        1_000_000_000, 0, LocalDateTime.now(), "v2.6", "8.0",
+                        false)
         );
+
+        print("Se ha lanzado la excepción " + exception);
     }
 
     @Test(2)
     public void constructor1_FutureUpdate_ThenIllegalArgumentException() {
         LocalDateTime dateTime = LocalDateTime.of(3000, 1, 1, 0, 0);
 
-        ApplicationData data = new ApplicationData(
-                "Discord", AppCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
-                0, dateTime, "v2.6", "8.0", false
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new ApplicationData("Discord", AppCategory.COMMUNICATION, 4.7f, 900_000,
+                        "200M", 1_000_000_000, 0, dateTime, "v2.6", "8.0",
+                        false)
         );
+
+        print("Se ha lanzado la excepción " + exception);
     }
 
     @Test(3)
-    public void constructor1_NoInstallsButPositiveReviews_ThenIllegalArgumentException() {
+    public void constructor1_NoInstallsButThereAreReviews_ThenIllegalArgumentException() {
         int installs = 0;
         int reviews = 500;
 
-        ApplicationData data = new ApplicationData(
-                "Discord", AppCategory.COMMUNICATION, 4.7f, reviews, "200M", installs,
-                0, LocalDateTime.now(), "v2.6", "8.0", false
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new ApplicationData("Discord", AppCategory.COMMUNICATION, 4.7f, reviews, "200M",
+                        installs, 0, LocalDateTime.now(), "v2.6", "8.0", false)
         );
+
+        print("Se ha lanzado la excepción " + exception);
     }
 
     //
@@ -101,5 +112,9 @@ public class ApplicationDataTest extends UnitTest {
 
         checkState(data.timeSinceLastUpdate(oneDayAfter).equals(Duration.ofDays(1)));
         print("Tiempo desde la última actualización = " + data.timeSinceLastUpdate(oneDayAfter).toDays() + " días");
+    }
+
+    public static void main(String[] args) {
+        new ApplicationDataTest().init();
     }
 }

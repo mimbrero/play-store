@@ -15,10 +15,8 @@ public abstract class UnitTest {
                 .sorted(Comparator.comparingInt(method -> method.getAnnotation(Test.class).value()))
                 .forEachOrdered(method -> this.testMethod(method, results));
 
-        print("\n\n");
-        printSeparator();
-        print("Tests terminados. " + results.getSuccessful() + " correctamente y " + results.getExceptions() + " excepciones capturadas.");
-        printSeparator();
+        print("\n\n================================================");
+        print("Tests terminados. " + results.getSuccessful() + " correctamente y " + results.getExceptions() + " fallidos.");
     }
 
     protected void printSeparator() {
@@ -36,14 +34,14 @@ public abstract class UnitTest {
     private void testMethod(Method method, TestResults results) {
         print("\n");
         printSeparator();
-        print("Test #" + method.getName() + ":");
+        print("Test " + method.getName() + ":");
         printSeparator();
 
         try {
             method.invoke(this);
             results.incrementSuccessful();
         } catch (InvocationTargetException t) {
-            print("Capturada " + t.getTargetException() + ".");
+            t.getTargetException().printStackTrace();
             results.incrementExceptions();
         } catch (IllegalAccessException ignored) {
         }
