@@ -90,9 +90,9 @@ public class ApplicationDataTest extends UnitTest {
     public void constructor2_AllFine() {
         ApplicationData data = new ApplicationData("Discord", AppCategory.COMMUNICATION, "200M", 0, "v2.6", "8.0", false);
 
-        checkState(data.rating() == 0);
-        checkState(data.reviews() == 0);
-        checkState(data.installs() == 0);
+        checkState(data.getRating() == 0);
+        checkState(data.getReviews() == 0);
+        checkState(data.getInstalls() == 0);
 
         print(data);
     }
@@ -105,9 +105,9 @@ public class ApplicationDataTest extends UnitTest {
     @Test(5)
     public void type_PriceIsZero_FREE() {
         ApplicationData data = MOCK;
-        checkState(data.type() == AppType.FREE);
+        checkState(data.getType() == AppType.FREE);
 
-        print("Tipo = " + data.type() + " (el precio es " + data.price() + ").");
+        print("Tipo = " + data.getType() + " (el precio es " + data.getPrice() + ").");
     }
 
     // Prueba del método #timeSinceLastUpdate(Temporal)
@@ -116,8 +116,8 @@ public class ApplicationDataTest extends UnitTest {
         ApplicationData data = MOCK;
         LocalDateTime oneDayAfter = LocalDateTime.of(2021, 12, 30, 0, 0);
 
-        checkState(data.timeSinceLastUpdate(oneDayAfter).equals(Duration.ofDays(1)));
-        print("Tiempo desde la última actualización = " + data.timeSinceLastUpdate(oneDayAfter).toDays() + " días");
+        checkState(data.getTimeSinceLastUpdate(oneDayAfter).equals(Duration.ofDays(1)));
+        print("Tiempo desde la última actualización = " + data.getTimeSinceLastUpdate(oneDayAfter).toDays() + " días");
     }
 
     public static void main(String[] args) {
