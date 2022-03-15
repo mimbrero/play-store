@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Representa los datos de una aplicación alojada en Google Play.
  */
-public final class ApplicationData implements Comparable<ApplicationData> {
+public final class ApplicationData implements Comparable<ApplicationData>, Cloneable {
 
     private String name;
     private AppCategory category;
@@ -114,45 +114,6 @@ public final class ApplicationData implements Comparable<ApplicationData> {
         return rate;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (ApplicationData) obj;
-        return Objects.equals(this.name, that.name) &&
-                Objects.equals(this.category, that.category) &&
-                Float.floatToIntBits(this.rating) == Float.floatToIntBits(that.rating) &&
-                this.reviews == that.reviews &&
-                Objects.equals(this.size, that.size) &&
-                this.installs == that.installs &&
-                Float.floatToIntBits(this.price) == Float.floatToIntBits(that.price) &&
-                Objects.equals(this.lastUpdated, that.lastUpdated) &&
-                Objects.equals(this.currentVersion, that.currentVersion) &&
-                Objects.equals(this.androidVersion, that.androidVersion) &&
-                this.multiDevice == that.multiDevice;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-        return "ApplicationData[" +
-                "name=" + name + ", " +
-                "category=" + category + ", " +
-                "rating=" + rating + ", " +
-                "reviews=" + reviews + ", " +
-                "size=" + size + ", " +
-                "installs=" + installs + ", " +
-                "price=" + price + ", " +
-                "lastUpdated=" + lastUpdated + ", " +
-                "currentVersion=" + currentVersion + ", " +
-                "androidVersion=" + androidVersion + ", " +
-                "multiDevice=" + multiDevice + ']';
-    }
-
     public String getName() {
         return name;
     }
@@ -239,5 +200,54 @@ public final class ApplicationData implements Comparable<ApplicationData> {
 
     public void setMultiDevice(boolean multiDevice) {
         this.multiDevice = multiDevice;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (ApplicationData) obj;
+        return Objects.equals(this.name, that.name) &&
+                Objects.equals(this.category, that.category) &&
+                Float.floatToIntBits(this.rating) == Float.floatToIntBits(that.rating) &&
+                this.reviews == that.reviews &&
+                Objects.equals(this.size, that.size) &&
+                this.installs == that.installs &&
+                Float.floatToIntBits(this.price) == Float.floatToIntBits(that.price) &&
+                Objects.equals(this.lastUpdated, that.lastUpdated) &&
+                Objects.equals(this.currentVersion, that.currentVersion) &&
+                Objects.equals(this.androidVersion, that.androidVersion) &&
+                this.multiDevice == that.multiDevice;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationData[" +
+                "name=" + name + ", " +
+                "category=" + category + ", " +
+                "rating=" + rating + ", " +
+                "reviews=" + reviews + ", " +
+                "size=" + size + ", " +
+                "installs=" + installs + ", " +
+                "price=" + price + ", " +
+                "lastUpdated=" + lastUpdated + ", " +
+                "currentVersion=" + currentVersion + ", " +
+                "androidVersion=" + androidVersion + ", " +
+                "multiDevice=" + multiDevice + ']';
+    }
+
+    @Override
+    public ApplicationData clone() {
+        try {
+            // De momento no hay propiedades mutables, así que no hay que clonar nada más
+            return (ApplicationData) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }
