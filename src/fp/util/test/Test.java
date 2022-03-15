@@ -9,5 +9,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Test {
 
+    /**
+     * Order for this test to be executed.
+     */
     int value() default 0;
 }
