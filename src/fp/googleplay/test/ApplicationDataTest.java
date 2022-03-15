@@ -136,7 +136,7 @@ public class ApplicationDataTest extends UnitTest {
 
     // Prueba del método #compareTo() con misma valoración y número de valoraciones pero distinto número de instalaciones
     @Test(8)
-    public void compareTo_SameRatingAndReviewsButSecondWithMoreInstalls_GreaterThan0() {
+    public void compareTo_SameRatingAndReviewsButFirstWithMoreInstalls_GreaterThan0() {
         ApplicationData app1 = MOCK.clone();
         ApplicationData app2 = MOCK.clone();
 
