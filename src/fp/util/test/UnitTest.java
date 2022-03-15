@@ -27,7 +27,7 @@ public abstract class UnitTest {
 
             print("\n\n");
             printSeparator();
-            print("Test " + method.getName().replace("_", " ") + ":");
+            print("Test #" + method.getName() + ":");
             printSeparator();
 
             try {
