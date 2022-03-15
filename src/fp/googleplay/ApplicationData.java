@@ -5,6 +5,7 @@ import fp.util.Preconditions;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 
 /**
  * Representa los datos de una aplicación alojada en Google Play.
@@ -77,7 +78,14 @@ public record ApplicationData(String name, AppCategory category, float rating, i
      * @return el tiempo que hace desde la última actualización
      */
     public Duration timeSinceLastUpdate() {
-        return Duration.between(this.lastUpdated(), Instant.now());
+        return this.timeSinceLastUpdate(Instant.now());
+    }
+
+    /**
+     * @return el tiempo que hace desde la última actualización hasta el instante pasado como argumento.
+     */
+    public Duration timeSinceLastUpdate(Temporal instant) {
+        return Duration.between(this.lastUpdated(), instant);
     }
 
     /**
