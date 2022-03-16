@@ -5,6 +5,12 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * Clase a extender por todos los tests.
+ *
+ * Para ejecutar el test, se tiene que instanciar y llamar al método {@link #init()}.
+ * Los métodos anotados con {@link Test} serán ejecutados en el orden marcado por {@link Test#value()}.
+ */
 public abstract class UnitTest {
 
     public void init() {

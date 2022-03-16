@@ -1,6 +1,6 @@
 package fp.util.test;
 
-public class TestResults {
+class TestResults {
 
     private int successful;
     private int exceptions;
