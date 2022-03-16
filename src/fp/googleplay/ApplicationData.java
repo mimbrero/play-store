@@ -46,10 +46,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
         Preconditions.checkArgument(reviews >= 0, "reviews no puede ser negativo");
         Preconditions.checkArgument(installs >= 0, "installs no puede ser negativo");
         Preconditions.checkArgument(!lastUpdated.isAfter(LocalDateTime.now()), "lastUpdated está en el futuro");
-        Preconditions.checkArgument(
-                installs > 0 || reviews == 0,
-                "el número de valoraciones no puede ser mayor a 0 si el número de instalaciones es 0"
-        );
+        Preconditions.checkArgument(installs > 0 || reviews == 0, "reviews debe ser 0 si installs es 0");
 
         this.name = name;
         this.category = category;
