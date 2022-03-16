@@ -47,8 +47,7 @@ Representa los datos de una aplicación alojada en Google Play.
 Se acceden y modifican a través de sus _getters_ y _setters_.
 
 - **Básicas**:
-    - **name**, de tipo `String`, consultable y modificable. Indica si las partidas han sido calificadas o no, es decir
-      si son partidas amistosas o de tipo clasificatorio.
+    - **name**, de tipo `String`, consultable y modificable. Indica el nombre de la aplicación.
     - **category**, de tipo `AppCategory`, consultable y modificable. Indica la categoría de la aplicación.
     - **rating**, de tipo `float`, consultable y modificable. Indica la media ya calculada de las valoraciones de los
       usuarios.
@@ -75,8 +74,7 @@ Se acceden y modifican a través de sus _getters_ y _setters_.
 **Constructores**:
 
 - **C1**: Tiene un parámetro por cada propiedad básica del tipo.
-- **C2**: Crea un objeto de tipo ```Partida``` a partir de los siguientes
-  parámetros: ```String name, AppCategory category, String size, float price, String currentVersion, String androidVersion, boolean multiDevice```
+- **C2**: Constructor auxiliar con los siguientes par: ```String name, AppCategory category, String size, float price, String currentVersion, String androidVersion, boolean multiDevice```
 
 **Restricciones**:
 
