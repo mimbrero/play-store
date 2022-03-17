@@ -10,7 +10,7 @@ Autor/a: Alberto Sánchez Mimbrero uvus:albsanmim
     * **fp.util**: Paquete que contiene las clases de utilidad.
         * **test**: Paquete que contiene una librería de utilidad para hacer tests.
 - **/data**: Contiene el dataset del proyecto.
-    * **chess.csv**: Archivo csv que contiene datos de diferentes aplicaciones alojadas en Google Play.
+    * **mock-data.csv**: Archivo csv que contiene datos de diferentes aplicaciones alojadas en Google Play.
 
 ## Estructura del _dataset_
 
