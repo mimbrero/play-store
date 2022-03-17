@@ -2,15 +2,27 @@
 
 Autor/a: Alberto Sánchez Mimbrero uvus:albsanmim
 
-## Estructura de las carpetas del proyecto
+## Estructura del proyecto
 
-- **/src**: Directorio con el código fuente.
-    * **fp.googleplay**: Paquete que contiene los tipos del proyecto.
-        * **test**: Paquete que contiene las clases de test del proyecto.
-    * **fp.util**: Paquete que contiene las clases de utilidad.
-        * **test**: Paquete que contiene una librería de utilidad para hacer tests.
-- **/data**: Contiene el dataset del proyecto.
-    * **mock-data.csv**: Archivo csv que contiene datos de diferentes aplicaciones alojadas en Google Play.
+- **/src/fp/**: Directorio con el código fuente.
+    - **googleplay/**: Paquete que contiene los tipos del proyecto.
+        - **test/**: Paquete que contiene las clases de test del proyecto.
+            - **ApplicationDataTest.java**: test del tipo `ApplicationData`.
+        - **AppCategory.java**: Enumerado con las categorías que puede tomar una aplicación.
+        - **ApplicationData.java**: Tipo base del proyecto. Representa los datos de una aplicación alojada en Google
+          Play.
+        - **AppType.java**: Enumerado que indica si una aplicación es gratis o de pago.
+    - **util/**: Paquete que contiene las clases de utilidad.
+        - **test/**: Paquete que contiene una librería de utilidad para hacer tests.
+            - **Assertions.java**: Métodos útiles para afirmar condiciones en los tests.
+            - **Test.java**: Anotación para indicar que un método es una prueba, para ser ejecutado por el test.
+            - **TestResults.java**: Tipo visible solo en el paquete para recopilar información sobre los tests
+              ejecutados.
+            - **UnitTest.java**: Clase a extender por los tests, que contiene métodos útiles y la lógica de los tests.
+        - **LocalDateTimeParser.java**: Clase con métodos para parsear `LocalDateTime`s.
+        - **Preconditions.java**: Métodos útiles para validar condiciones.
+- **/data/**: Contiene el dataset del proyecto.
+    - **mock-data.csv**: Archivo csv que contiene datos de diferentes aplicaciones alojadas en Google Play.
 
 ## Estructura del _dataset_
 
@@ -74,7 +86,8 @@ Se acceden y modifican a través de sus _getters_ y _setters_.
 **Constructores**:
 
 - **C1**: Tiene un parámetro por cada propiedad básica del tipo.
-- **C2**: Constructor auxiliar con los siguientes par: ```String name, AppCategory category, String size, float price, String currentVersion, String androidVersion, boolean multiDevice```
+- **C2**: Constructor auxiliar con los siguientes
+  parámetros: ```String name, AppCategory category, String size, float price, String currentVersion, String androidVersion, boolean multiDevice```
 
 **Restricciones**:
 
@@ -103,3 +116,82 @@ Por valoración media, número de valoraciones e instalaciones.
 - **AppCategory**, enum. Puede tomar los valores ART_AND_DESIGN, AUTO_AND_VEHICLES, BEAUTY, BOOKS_AND_REFERENCE,
   BUSINESS, COMICS, COMMUNICATION, DATING, EDUCATION o ENTERTAINMENT.
 - **AppType**, enum. Puede tomar los valores FREE y PAID.
+
+## Útiles
+
+### LocalDateTimeParser
+
+Clase con métodos para parsear `LocalDateTime`s.
+
+**Métodos estáticos públicos**:
+
+- **LocalDateTime parse(String date, String time)**: Parsea la `LocalDateTime` pasada como argumento con fecha con
+  formato `d/M/y` y hora con formato `h:m`.
+- **LocalDateTime parse(String line)**: Parsea la `LocalDateTime` pasada como argumento con formato `d/M/y h:m`.
+
+### Preconditions
+
+Métodos útiles para validar condiciones.
+
+**Métodos estáticos públicos**:
+
+- **void checkArgument(boolean expression)** y
+- **void checkArgument(boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento
+  se evalúa a `true`. En caso contrario, lanzará una `IllegalArgumentException` con el mensaje propuesto.
+- **void checkState(boolean expression)** y
+- **void checkState(boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento se
+  evalúa a `true`. En caso contrario, lanzará una `IllegalArgumentException` con el mensaje propuesto.
+- **\<T> T checkNotNull(T toCheck)** y
+- **\<T> T checkNotNull(T toCheck, String exceptionMessage)**: Comprueba que la expresión pasada como argumento no
+  es `null`. En caso contrario, lanzará una `NullPointerException` con el mensaje propuesto.
+
+### test/Assertions
+
+Métodos útiles para afirmar condiciones en los tests.
+
+**Métodos estáticos públicos**:
+
+- **void assertThat(boolean expression)** y
+- **void assertThat(boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento se
+  evalúa a `true`.
+- **\<T extends Throwable> T assertThrows(Class\<T> throwableClass, Runnable runnable)** y
+- **\<T extends Throwable> T assertThrows(Class\<T> throwableClass, Runnable runnable, String exceptionMessage)**:
+  Comprueba que el `Runnable` pasado como argumento lanza una excepción del tipo especificado. Esto hace que la
+  excepción no se lance.
+
+### test/Test
+
+Anotación para indicar que un método es una prueba, para ser ejecutado por el test.
+
+**Métodos/propiedades**:
+
+- **int value()**: número para ordenar los métodos de test y ejecutarlos en ese orden.
+
+### test/TestResults
+
+Tipo visible solo en el paquete para recopilar información sobre los tests ejecutados.
+
+**Propiedades**:
+Todas las propiedades son accesibles y modificables por sus getters y setters públicos.
+
+- **private int successful**: número de métodos que se ejecutaron sin lanzar una excepción.
+- **private int exceptions**: número de métodos que fallaron lanzando una excepción.
+
+**Métodos**:
+
+- **public void incrementSuccessful()**: incrementa en 1 la propiedad `successful`.
+- **public void incrementExceptions()**: incrementa en 1 la propiedad `exceptions`.
+
+### test/UnitTest
+
+Clase a extender por los tests, que contiene métodos útiles y la lógica de los tests.
+
+**Métodos**:
+
+- **protected void printSeparator()**: imprime un separador en la consola (muchos `=` seguidos).
+- **protected void print(String s)**: imprime la `String` pasada como argumento en la consola.
+- **protected void print(Object o)**: imprime el `Object` pasado como argumento en la consola.
+- **public void init()**: Instancia un `TestResults` y, mediante _reflection_, busca los métodos públicos en la clase
+  que tengan la anotación `Test`, los ordena por la propiedad de la anotación `#value()` y los invoca. Si falla, suma
+  una excepción a los resultados e imprime la excepción. En caso contrario, suma un test correcto. Cuando termina,
+  imprime el número de tests correctos y fallidos.
