@@ -74,25 +74,4 @@ public class Preconditions {
             throw new NullPointerException(exceptionMessage);
         return toCheck;
     }
-
-    /**
-     * Comprueba que el objeto pasado como argumento es {@code null}. En caso contrario, lanzará una
-     * {@link IllegalStateException}.
-     *
-     * @param toCheck objeto a comprobar
-     */
-    public static void checkNull(Object toCheck) {
-        checkNull(toCheck, null);
-    }
-
-    /**
-     * Comprueba que el objeto pasado como argumento es {@code null}. En caso contrario, lanzará una
-     * {@link IllegalStateException} con el mensaje propuesto.
-     *
-     * @param toCheck          objeto a comprobar
-     * @param exceptionMessage mensaje que tendrá la excepción
-     */
-    public static void checkNull(Object toCheck, String exceptionMessage) {
-        checkState(toCheck == null, exceptionMessage);
-    }
 }
