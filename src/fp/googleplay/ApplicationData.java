@@ -123,6 +123,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
     }
 
     public void setName(String name) {
+        Preconditions.checkArgument(!name.isEmpty(), "name no puede estar vacío");
         this.name = name;
     }
 
@@ -139,6 +140,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
     }
 
     public void setRating(Float rating) {
+        Preconditions.checkArgument(rating != null && rating >= 0 && rating <= 5, "rating debe estar entre 0 y 5 ambos inclusive");
         this.rating = rating;
     }
 
@@ -147,6 +149,8 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
     }
 
     public void setReviews(Integer reviews) {
+        Preconditions.checkArgument(reviews != null && reviews >= 0, "reviews no puede ser negativo");
+        Preconditions.checkArgument(installs > 0 || reviews == 0, "reviews debe ser 0 si installs es 0");
         this.reviews = reviews;
     }
 
@@ -163,6 +167,8 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
     }
 
     public void setInstalls(Integer installs) {
+        Preconditions.checkArgument(installs != null && installs >= 0, "installs no puede ser negativo");
+        Preconditions.checkArgument(installs > 0 || reviews == 0, "reviews debe ser 0 si installs es 0");
         this.installs = installs;
     }
 
@@ -179,6 +185,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
     }
 
     public void setLastUpdated(LocalDateTime lastUpdated) {
+        Preconditions.checkArgument(!lastUpdated.isAfter(LocalDateTime.now()), "lastUpdated está en el futuro");
         this.lastUpdated = lastUpdated;
     }
 
