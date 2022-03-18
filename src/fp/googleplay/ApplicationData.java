@@ -37,6 +37,11 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
      * @param currentVersion versión actual de la aplicación
      * @param androidVersion versión mínima de Android para funcionar
      * @param multiDevice    si se puede usar en otras plataformas Android (como Android TV)
+     * @throws IllegalArgumentException si {@code name} está vacío
+     * @throws IllegalArgumentException si {@code rating} no está entre 0 y 5 (ambos inclusive)
+     * @throws IllegalArgumentException si {@code reviews} o {@code installs} son negativos
+     * @throws IllegalArgumentException si {@code lastUpdated} es después de {@link LocalDateTime#now()}
+     * @throws IllegalArgumentException si {@code reviews} es un número mayor a 0 mientras que {@code installs} es 0
      */
     public ApplicationData(String name, AppCategory category, float rating, int reviews, String size, int installs,
                            float price, LocalDateTime lastUpdated, String currentVersion, String androidVersion, boolean multiDevice) {
@@ -72,6 +77,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
      * @param currentVersion versión actual de la aplicación
      * @param androidVersion versión mínima de Android para funcionar
      * @param multiDevice    si se puede usar en otras plataformas Android (como Android TV)
+     * @throws IllegalArgumentException si {@code name} está vacío
      */
     public ApplicationData(String name, AppCategory category, String size, float price, String currentVersion,
                            String androidVersion, boolean multiDevice) {
