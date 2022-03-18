@@ -134,23 +134,37 @@ public class ApplicationDataTest extends UnitTest {
         print("app2 (4.5 de valoración) es mayor que app1 (4 de valoración)");
     }
 
-    // Prueba del método #compareTo() con misma valoración y número de valoraciones pero distinto número de instalaciones
+    // Prueba del método #compareTo(ApplicationData) con misma valoración y número de valoraciones pero distinto número de instalaciones
     @Test(8)
     public void compareTo_SameRatingAndReviewsButFirstWithMoreInstalls_GreaterThan0() {
         ApplicationData app1 = MOCK.clone();
         ApplicationData app2 = MOCK.clone();
 
-        app1.setRating(4);
-        app2.setRating(4);
-
-        app1.setReviews(900);
-        app2.setReviews(900);
-
-        app1.setInstalls(200_000_000);
         app2.setInstalls(100_000_000);
 
         assertThat(app1.compareTo(app2) > 0, "app1 debería ser mayor que app2");
-        print("app1 (200 000 000 instalaciones) es mayor que app2 (100 000 000 instalaciones)");
+        print("app1 (1 000 000 000 instalaciones) es mayor que app2 (100 000 000 instalaciones)");
+    }
+
+    // Prueba del método #equals(Object)
+    @Test(9)
+    public void equals_SameProperties_true() {
+        ApplicationData app1 = MOCK.clone();
+        ApplicationData app2 = MOCK.clone();
+
+        assertThat(app1 != app2, "app1 no debería ser el mismo objeto que app2");
+        assertThat(app1.equals(app2), "app1 debería ser igual que app2");
+        print("app1 es igual a app2");
+    }
+
+    // Prueba del método #hashCode()
+    @Test(10)
+    public void hashCode_SameProperties_SameHashCode() {
+        ApplicationData app1 = MOCK.clone();
+        ApplicationData app2 = MOCK.clone();
+
+        assertThat(app1.hashCode() == app2.hashCode(), "el hashCode de app1 debería ser igual al de app2");
+        print("app1 tiene el mismo hashCode que app2");
     }
 
     public static void main(String[] args) {
