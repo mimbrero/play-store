@@ -15,15 +15,15 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
 
     private String name;
     private AppCategory category;
-    private float rating;
-    private int reviews;
+    private Float rating;
+    private Integer reviews;
     private String size;
-    private int installs;
-    private float price;
+    private Integer installs;
+    private Float price;
     private LocalDateTime lastUpdated;
     private String currentVersion;
     private String androidVersion;
-    private boolean multiDevice;
+    private Boolean multiDevice;
 
     /**
      * @param name           nombre de la aplicación
@@ -43,13 +43,14 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
      * @throws IllegalArgumentException si {@code lastUpdated} es después de {@link LocalDateTime#now()}
      * @throws IllegalArgumentException si {@code reviews} es un número mayor a 0 mientras que {@code installs} es 0
      */
-    public ApplicationData(String name, AppCategory category, float rating, int reviews, String size, int installs,
-                           float price, LocalDateTime lastUpdated, String currentVersion, String androidVersion, boolean multiDevice) {
+    public ApplicationData(String name, AppCategory category, Float rating, Integer reviews, String size,
+                           Integer installs, Float price, LocalDateTime lastUpdated, String currentVersion,
+                           String androidVersion, Boolean multiDevice) {
 
         Preconditions.checkArgument(!name.isEmpty(), "name no puede estar vacío");
-        Preconditions.checkArgument(rating >= 0 && rating <= 5, "rating debe estar entre 0 y 5 ambos inclusive");
-        Preconditions.checkArgument(reviews >= 0, "reviews no puede ser negativo");
-        Preconditions.checkArgument(installs >= 0, "installs no puede ser negativo");
+        Preconditions.checkArgument(rating != null && rating >= 0 && rating <= 5, "rating debe estar entre 0 y 5 ambos inclusive");
+        Preconditions.checkArgument(reviews != null && reviews >= 0, "reviews no puede ser negativo");
+        Preconditions.checkArgument(installs != null && installs >= 0, "installs no puede ser negativo");
         Preconditions.checkArgument(!lastUpdated.isAfter(LocalDateTime.now()), "lastUpdated está en el futuro");
         Preconditions.checkArgument(installs > 0 || reviews == 0, "reviews debe ser 0 si installs es 0");
 
@@ -79,9 +80,9 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
      * @param multiDevice    si se puede usar en otras plataformas Android (como Android TV)
      * @throws IllegalArgumentException si {@code name} está vacío
      */
-    public ApplicationData(String name, AppCategory category, String size, float price, String currentVersion,
-                           String androidVersion, boolean multiDevice) {
-        this(name, category, 0, 0, size, 0, price, LocalDateTime.now(), currentVersion, androidVersion, multiDevice);
+    public ApplicationData(String name, AppCategory category, String size, Float price, String currentVersion,
+                           String androidVersion, Boolean multiDevice) {
+        this(name, category, 0F, 0, size, 0, price, LocalDateTime.now(), currentVersion, androidVersion, multiDevice);
     }
 
     /**
@@ -111,9 +112,9 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
      */
     @Override
     public int compareTo(ApplicationData other) {
-        int rate = Float.compare(this.getRating(), other.getRating());
-        if (rate == 0) rate = Integer.compare(this.getReviews(), other.getReviews());
-        if (rate == 0) rate = Integer.compare(this.getInstalls(), other.getInstalls());
+        int rate = this.getRating().compareTo(other.getRating());
+        if (rate == 0) rate = this.getReviews().compareTo(other.getReviews());
+        if (rate == 0) rate = this.getInstalls().compareTo(other.getInstalls());
         return rate;
     }
 
@@ -133,19 +134,19 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
         this.category = category;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
-    public int getReviews() {
+    public Integer getReviews() {
         return reviews;
     }
 
-    public void setReviews(int reviews) {
+    public void setReviews(Integer reviews) {
         this.reviews = reviews;
     }
 
@@ -157,19 +158,19 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
         this.size = size;
     }
 
-    public int getInstalls() {
+    public Integer getInstalls() {
         return installs;
     }
 
-    public void setInstalls(int installs) {
+    public void setInstalls(Integer installs) {
         this.installs = installs;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -197,30 +198,20 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
         this.androidVersion = androidVersion;
     }
 
-    public boolean isMultiDevice() {
+    public Boolean getMultiDevice() {
         return multiDevice;
     }
 
-    public void setMultiDevice(boolean multiDevice) {
+    public void setMultiDevice(Boolean multiDevice) {
         this.multiDevice = multiDevice;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (ApplicationData) obj;
-        return Objects.equals(this.name, that.name) &&
-                Objects.equals(this.category, that.category) &&
-                Float.floatToIntBits(this.rating) == Float.floatToIntBits(that.rating) &&
-                this.reviews == that.reviews &&
-                Objects.equals(this.size, that.size) &&
-                this.installs == that.installs &&
-                Float.floatToIntBits(this.price) == Float.floatToIntBits(that.price) &&
-                Objects.equals(this.lastUpdated, that.lastUpdated) &&
-                Objects.equals(this.currentVersion, that.currentVersion) &&
-                Objects.equals(this.androidVersion, that.androidVersion) &&
-                this.multiDevice == that.multiDevice;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ApplicationData that = (ApplicationData) o;
+        return Objects.equals(name, that.name) && category == that.category && Objects.equals(rating, that.rating) && Objects.equals(reviews, that.reviews) && Objects.equals(size, that.size) && Objects.equals(installs, that.installs) && Objects.equals(price, that.price) && Objects.equals(lastUpdated, that.lastUpdated) && Objects.equals(currentVersion, that.currentVersion) && Objects.equals(androidVersion, that.androidVersion) && Objects.equals(multiDevice, that.multiDevice);
     }
 
     @Override

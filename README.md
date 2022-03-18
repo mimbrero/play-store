@@ -61,21 +61,21 @@ Se acceden y modifican a través de sus _getters_ y _setters_.
 - **Básicas**:
     - **name**, de tipo `String`, consultable y modificable. Indica el nombre de la aplicación.
     - **category**, de tipo `AppCategory`, consultable y modificable. Indica la categoría de la aplicación.
-    - **rating**, de tipo `float`, consultable y modificable. Indica la media ya calculada de las valoraciones de los
+    - **rating**, de tipo `Float`, consultable y modificable. Indica la media ya calculada de las valoraciones de los
       usuarios.
-    - **reviews**, de tipo `int`, consultable y modificable. Indica el número de valoraciones de los usuarios.
+    - **reviews**, de tipo `Integer`, consultable y modificable. Indica el número de valoraciones de los usuarios.
     - **size**, de tipo `String`, consultable y modificable. Indica el tamaño de la aplicación, con su unidad (por
       ejemplo, `200M` para 200 megabytes). También puede contener `Varies with device` si varía con el dispsitivo, según
       la disponibilidad de las dependencias de la aplicación.
-    - **installs**, de tipo `int`, consultable y modificable. Indica el número de instalaciones aproximado por exceso.
-    - **price**, de tipo `float`, consultable y modificable. Indica el precio de la aplicación (0 si es gratis).
+    - **installs**, de tipo `Integer`, consultable y modificable. Indica el número de instalaciones aproximado por exceso.
+    - **price**, de tipo `Float`, consultable y modificable. Indica el precio de la aplicación (0 si es gratis).
     - **lastUpdated**, de tipo `LocalDateTime`, consultable y modificable. Indica la fecha y hora de la última
       actualización.
     - **currentVersion**, de tipo `String`, consultable y modificable. Indica la versión actual de la aplicación.
     - **androidVersion**, de tipo `String`, consultable y modificable. Indica la versión de Android necesaria para la
       aplicación. Si contiene `and up` al final, la versión especificada es la mínima, pero se puede ejecutar en
       posteriores. También es posible `Varies with device`.
-    - **multiDevice**, de tipo `boolean`, consultable y modificable. Indica si tiene soporte extendido para las otras
+    - **multiDevice**, de tipo `Boolean`, consultable y modificable. Indica si tiene soporte extendido para las otras
       plataformas Android no típicas
       (como Android TV, Android Auto...)
 
@@ -87,7 +87,7 @@ Se acceden y modifican a través de sus _getters_ y _setters_.
 
 - **C1**: Tiene un parámetro por cada propiedad básica del tipo.
 - **C2**: Constructor auxiliar con los siguientes
-  parámetros: ```String name, AppCategory category, String size, float price, String currentVersion, String androidVersion, boolean multiDevice```
+  parámetros: ```String name, AppCategory category, String size, Float price, String currentVersion, String androidVersion, Boolean multiDevice```
 
 **Restricciones**:
 
@@ -135,11 +135,11 @@ Métodos útiles para validar condiciones.
 
 **Métodos estáticos públicos**:
 
-- **void checkArgument(boolean expression)** y
-- **void checkArgument(boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento
+- **void checkArgument(Boolean expression)** y
+- **void checkArgument(Boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento
   se evalúa a `true`. En caso contrario, lanzará una `IllegalArgumentException` con el mensaje propuesto.
-- **void checkState(boolean expression)** y
-- **void checkState(boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento se
+- **void checkState(Boolean expression)** y
+- **void checkState(Boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento se
   evalúa a `true`. En caso contrario, lanzará una `IllegalArgumentException` con el mensaje propuesto.
 - **\<T> T checkNotNull(T toCheck)** y
 - **\<T> T checkNotNull(T toCheck, String exceptionMessage)**: Comprueba que la expresión pasada como argumento no
@@ -151,8 +151,8 @@ Métodos útiles para afirmar condiciones en los tests.
 
 **Métodos estáticos públicos**:
 
-- **void assertThat(boolean expression)** y
-- **void assertThat(boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento se
+- **void assertThat(Boolean expression)** y
+- **void assertThat(Boolean expression, String exceptionMessage)**: Comprueba que la expresión pasada como argumento se
   evalúa a `true`.
 - **\<T extends Throwable> T assertThrows(Class\<T> throwableClass, Runnable runnable)** y
 - **\<T extends Throwable> T assertThrows(Class\<T> throwableClass, Runnable runnable, String exceptionMessage)**:
@@ -174,8 +174,8 @@ Tipo visible solo en el paquete para recopilar información sobre los tests ejec
 **Propiedades**:
 Todas las propiedades son accesibles y modificables por sus getters y setters públicos.
 
-- **private int successful**: número de métodos que se ejecutaron sin lanzar una excepción.
-- **private int exceptions**: número de métodos que fallaron lanzando una excepción.
+- **private Integer successful**: número de métodos que se ejecutaron sin lanzar una excepción.
+- **private Integer exceptions**: número de métodos que fallaron lanzando una excepción.
 
 **Métodos**:
 

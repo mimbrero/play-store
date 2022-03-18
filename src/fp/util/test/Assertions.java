@@ -11,7 +11,7 @@ public class Assertions {
      *
      * @param expression expresión a evaluar
      */
-    public static void assertThat(boolean expression) {
+    public static void assertThat(Boolean expression) {
         assertThat(expression, null);
     }
 
@@ -21,7 +21,7 @@ public class Assertions {
      * @param expression       expresión a evaluar
      * @param exceptionMessage mensaje que tendrá la excepción
      */
-    public static void assertThat(boolean expression, String exceptionMessage) {
+    public static void assertThat(Boolean expression, String exceptionMessage) {
         if (!expression)
             throw new AssertionError(exceptionMessage);
     }

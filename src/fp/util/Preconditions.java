@@ -12,7 +12,7 @@ public class Preconditions {
      *
      * @param expression expresión a evaluar
      */
-    public static void checkArgument(boolean expression) {
+    public static void checkArgument(Boolean expression) {
         checkArgument(expression, null);
     }
 
@@ -23,7 +23,7 @@ public class Preconditions {
      * @param expression       expresión a evaluar
      * @param exceptionMessage mensaje que tendrá la excepción
      */
-    public static void checkArgument(boolean expression, String exceptionMessage) {
+    public static void checkArgument(Boolean expression, String exceptionMessage) {
         if (!expression)
             throw new IllegalArgumentException(exceptionMessage);
     }
@@ -34,7 +34,7 @@ public class Preconditions {
      *
      * @param expression expresión a evaluar
      */
-    public static void checkState(boolean expression) {
+    public static void checkState(Boolean expression) {
         checkState(expression, null);
     }
 
@@ -45,7 +45,7 @@ public class Preconditions {
      * @param expression       expresión a evaluar
      * @param exceptionMessage mensaje que tendrá la excepción
      */
-    public static void checkState(boolean expression, String exceptionMessage) {
+    public static void checkState(Boolean expression, String exceptionMessage) {
         if (!expression)
             throw new IllegalStateException(exceptionMessage);
     }

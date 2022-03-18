@@ -22,7 +22,7 @@ public class ApplicationDataTest extends UnitTest {
     public void constructor1_AllFine() {
         ApplicationData data = new ApplicationData(
                 "Discord", AppCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
-                0, LocalDateTime.of(2021, 12, 29, 0, 0), "v2.6",
+                0F, LocalDateTime.of(2021, 12, 29, 0, 0), "v2.6",
                 "8.0", false
         );
 
@@ -37,7 +37,7 @@ public class ApplicationDataTest extends UnitTest {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> new ApplicationData(name, AppCategory.COMMUNICATION, 4.7f, 900_000, "200M",
-                        1_000_000_000, 0, LocalDateTime.now(), "v2.6", "8.0",
+                        1_000_000_000, 0F, LocalDateTime.now(), "v2.6", "8.0",
                         false),
                 "el constructor debería lanzar un IllegalArgumentException porque name está vacío"
         );
@@ -53,7 +53,7 @@ public class ApplicationDataTest extends UnitTest {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> new ApplicationData("Discord", AppCategory.COMMUNICATION, 4.7f, 900_000,
-                        "200M", 1_000_000_000, 0, dateTime, "v2.6", "8.0",
+                        "200M", 1_000_000_000, 0F, dateTime, "v2.6", "8.0",
                         false),
                 "el constructor debería lanzar un IllegalArgumentException porque lastUpdated es en el futuro"
         );
@@ -70,7 +70,7 @@ public class ApplicationDataTest extends UnitTest {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> new ApplicationData("Discord", AppCategory.COMMUNICATION, 4.7f, reviews, "200M",
-                        installs, 0, LocalDateTime.now(), "v2.6", "8.0", false),
+                        installs, 0F, LocalDateTime.now(), "v2.6", "8.0", false),
                 "el constructor debería lanzar un IllegalArgumentException porque no puede haber valoraciones si tiene 0 descargas"
         );
 
@@ -83,7 +83,8 @@ public class ApplicationDataTest extends UnitTest {
 
     @Test(4)
     public void constructor2_AllFine() {
-        ApplicationData data = new ApplicationData("Discord", AppCategory.COMMUNICATION, "200M", 0, "v2.6", "8.0", false);
+        ApplicationData data = new ApplicationData("Discord", AppCategory.COMMUNICATION, "200M", 0F,
+                "v2.6", "8.0", false);
 
         assertThat(data.getRating() == 0, "el constructor 2 debería poner rating en 0");
         assertThat(data.getReviews() == 0, "el constructor 2 debería poner reviews en 0");
@@ -99,7 +100,7 @@ public class ApplicationDataTest extends UnitTest {
     // Mock de un ApplicationData para usar en los tests de métodos
     private final ApplicationData MOCK = new ApplicationData(
             "Discord", AppCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
-            0, LocalDateTime.of(2021, 12, 29, 0, 0), "v2.6",
+            0F, LocalDateTime.of(2021, 12, 29, 0, 0), "v2.6",
             "8.0", false
     );
 
@@ -127,8 +128,8 @@ public class ApplicationDataTest extends UnitTest {
         ApplicationData app1 = MOCK.clone();
         ApplicationData app2 = MOCK.clone();
 
-        app1.setRating(4);
-        app2.setRating(4.5f);
+        app1.setRating(4F);
+        app2.setRating(4.5F);
 
         assertThat(app1.compareTo(app2) < 0, "app2 debería ser mayor que app1");
         print("app2 (4.5 de valoración) es mayor que app1 (4 de valoración)");
