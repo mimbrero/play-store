@@ -1,5 +1,5 @@
 package fp.googleplay;
 
-public enum AppType {
+public enum ApplicationType {
     FREE, PAID;
 }

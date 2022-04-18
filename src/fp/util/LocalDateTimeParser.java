@@ -12,22 +12,21 @@ public class LocalDateTimeParser {
     }
 
     /**
-     * Parsea la {@link LocalDateTime} pasada como argumento con fecha con formato {@code d/M/y} y hora con formato
-     * {@code h:m}.
+     * Parses the given {@link LocalDateTime} as a date in {@code d/M/y} format and time in {@code h:m} format.
      *
-     * @param date fecha a parsear, con formato {@code d/M/y}
-     * @param time hora a parsear, con formato {@code h:m}
-     * @return {@link LocalDateTime} parseada
+     * @param date date to parse, in {@code d/M/y} format
+     * @param time time to parse, in {@code h:m} format
+     * @return a parsed {@link LocalDateTime}
      */
     public static LocalDateTime parse(String date, String time) {
         return parse(date + " " + time);
     }
 
     /**
-     * Parsea la {@link LocalDateTime} pasada como argumento con formato {@code d/M/y h:m}.
+     * Parses the given {@link LocalDateTime} as a date and time with format {@code d/M/y h:m}.
      *
-     * @param line {@link String} a parsear, con formato {@code d/M/y h:m}
-     * @return {@link LocalDateTime} parseada
+     * @param line {@link LocalDateTime} to parse, in {@code d/M/y h:m} format
+     * @return a parsed {@link LocalDateTime}
      */
     public static LocalDateTime parse(String line) {
         return LocalDateTime.parse(line, FORMATTER);

@@ -1,6 +1,6 @@
 package fp.googleplay;
 
-public enum AppCategory {
+public enum ApplicationCategory {
     ART_AND_DESIGN,
     AUTO_AND_VEHICLES,
     BEAUTY,

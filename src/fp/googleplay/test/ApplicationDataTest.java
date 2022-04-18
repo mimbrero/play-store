@@ -1,7 +1,7 @@
 package fp.googleplay.test;
 
-import fp.googleplay.AppCategory;
-import fp.googleplay.AppType;
+import fp.googleplay.ApplicationCategory;
+import fp.googleplay.ApplicationType;
 import fp.googleplay.ApplicationData;
 import fp.util.test.Test;
 import fp.util.test.UnitTest;
@@ -21,7 +21,7 @@ public class ApplicationDataTest extends UnitTest {
     @Test
     public void constructor1_AllFine() {
         ApplicationData data = new ApplicationData(
-                "Discord", AppCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
+                "Discord", ApplicationCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
                 0F, LocalDateTime.of(2021, 12, 29, 0, 0), "v2.6",
                 "8.0", false
         );
@@ -36,7 +36,7 @@ public class ApplicationDataTest extends UnitTest {
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new ApplicationData(name, AppCategory.COMMUNICATION, 4.7f, 900_000, "200M",
+                () -> new ApplicationData(name, ApplicationCategory.COMMUNICATION, 4.7f, 900_000, "200M",
                         1_000_000_000, 0F, LocalDateTime.now(), "v2.6", "8.0",
                         false),
                 "el constructor debería lanzar un IllegalArgumentException porque name está vacío"
@@ -52,7 +52,7 @@ public class ApplicationDataTest extends UnitTest {
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new ApplicationData("Discord", AppCategory.COMMUNICATION, 4.7f, 900_000,
+                () -> new ApplicationData("Discord", ApplicationCategory.COMMUNICATION, 4.7f, 900_000,
                         "200M", 1_000_000_000, 0F, dateTime, "v2.6", "8.0",
                         false),
                 "el constructor debería lanzar un IllegalArgumentException porque lastUpdated es en el futuro"
@@ -69,7 +69,7 @@ public class ApplicationDataTest extends UnitTest {
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new ApplicationData("Discord", AppCategory.COMMUNICATION, 4.7f, reviews, "200M",
+                () -> new ApplicationData("Discord", ApplicationCategory.COMMUNICATION, 4.7f, reviews, "200M",
                         installs, 0F, LocalDateTime.now(), "v2.6", "8.0", false),
                 "el constructor debería lanzar un IllegalArgumentException porque no puede haber valoraciones si tiene 0 descargas"
         );
@@ -83,7 +83,7 @@ public class ApplicationDataTest extends UnitTest {
 
     @Test(4)
     public void constructor2_AllFine() {
-        ApplicationData data = new ApplicationData("Discord", AppCategory.COMMUNICATION, "200M", 0F,
+        ApplicationData data = new ApplicationData("Discord", ApplicationCategory.COMMUNICATION, "200M", 0F,
                 "v2.6", "8.0", false);
 
         assertThat(data.getRating() == 0, "el constructor 2 debería poner rating en 0");
@@ -99,7 +99,7 @@ public class ApplicationDataTest extends UnitTest {
 
     // Mock de un ApplicationData para usar en los tests de métodos
     private final ApplicationData MOCK = new ApplicationData(
-            "Discord", AppCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
+            "Discord", ApplicationCategory.COMMUNICATION, 4.7f, 900_000, "200M", 1_000_000_000,
             0F, LocalDateTime.of(2021, 12, 29, 0, 0), "v2.6",
             "8.0", false
     );
@@ -108,7 +108,7 @@ public class ApplicationDataTest extends UnitTest {
     @Test(5)
     public void getType_PriceIsZero_FREE() {
         ApplicationData data = MOCK;
-        assertThat(data.getType() == AppType.FREE, "#getType() debería devolver FREE porque el precio es 0");
+        assertThat(data.getType() == ApplicationType.FREE, "#getType() debería devolver FREE porque el precio es 0");
         print("Tipo = " + data.getType() + " (el precio es " + data.getPrice() + ").");
     }
 

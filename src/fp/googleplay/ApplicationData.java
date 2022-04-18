@@ -11,10 +11,10 @@ import java.util.Objects;
 /**
  * Representa los datos de una aplicación alojada en Google Play.
  */
-public final class ApplicationData implements Comparable<ApplicationData>, Cloneable {
+public class ApplicationData implements Comparable<ApplicationData>, Cloneable {
 
     private String name;
-    private AppCategory category;
+    private ApplicationCategory category;
     private Float rating;
     private Integer reviews;
     private String size;
@@ -43,7 +43,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
      * @throws IllegalArgumentException si {@code lastUpdated} es después de {@link LocalDateTime#now()}
      * @throws IllegalArgumentException si {@code reviews} es un número mayor a 0 mientras que {@code installs} es 0
      */
-    public ApplicationData(String name, AppCategory category, Float rating, Integer reviews, String size,
+    public ApplicationData(String name, ApplicationCategory category, Float rating, Integer reviews, String size,
                            Integer installs, Float price, LocalDateTime lastUpdated, String currentVersion,
                            String androidVersion, Boolean multiDevice) {
 
@@ -52,7 +52,7 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
         Preconditions.checkArgument(reviews != null && reviews >= 0, "reviews no puede ser negativo");
         Preconditions.checkArgument(installs != null && installs >= 0, "installs no puede ser negativo");
         Preconditions.checkArgument(!lastUpdated.isAfter(LocalDateTime.now()), "lastUpdated está en el futuro");
-        Preconditions.checkArgument(installs > 0 || reviews == 0, "reviews debe ser 0 si installs es 0");
+        Preconditions.checkArgument(installs != null && installs > 0 || reviews != null && reviews == 0, "reviews debe ser 0 si installs es 0");
 
         this.name = name;
         this.category = category;
@@ -80,17 +80,17 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
      * @param multiDevice    si se puede usar en otras plataformas Android (como Android TV)
      * @throws IllegalArgumentException si {@code name} está vacío
      */
-    public ApplicationData(String name, AppCategory category, String size, Float price, String currentVersion,
+    public ApplicationData(String name, ApplicationCategory category, String size, Float price, String currentVersion,
                            String androidVersion, Boolean multiDevice) {
         this(name, category, 0F, 0, size, 0, price, LocalDateTime.now(), currentVersion, androidVersion, multiDevice);
     }
 
     /**
-     * @return el tipo de la aplicación. {@link AppType#PAID} si el precio es mayor a 0, {@link AppType#FREE} en caso
+     * @return el tipo de la aplicación. {@link ApplicationType#PAID} si el precio es mayor a 0, {@link ApplicationType#FREE} en caso
      * contrario
      */
-    public AppType getType() {
-        return this.getPrice() > 0 ? AppType.PAID : AppType.FREE;
+    public ApplicationType getType() {
+        return this.getPrice() > 0 ? ApplicationType.PAID : ApplicationType.FREE;
     }
 
     /**
@@ -127,11 +127,11 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
         this.name = name;
     }
 
-    public AppCategory getCategory() {
+    public ApplicationCategory getCategory() {
         return category;
     }
 
-    public void setCategory(AppCategory category) {
+    public void setCategory(ApplicationCategory category) {
         this.category = category;
     }
 
@@ -228,18 +228,19 @@ public final class ApplicationData implements Comparable<ApplicationData>, Clone
 
     @Override
     public String toString() {
-        return "ApplicationData[" +
-                "name=" + name + ", " +
-                "category=" + category + ", " +
-                "rating=" + rating + ", " +
-                "reviews=" + reviews + ", " +
-                "size=" + size + ", " +
-                "installs=" + installs + ", " +
-                "price=" + price + ", " +
-                "lastUpdated=" + lastUpdated + ", " +
-                "currentVersion=" + currentVersion + ", " +
-                "androidVersion=" + androidVersion + ", " +
-                "multiDevice=" + multiDevice + ']';
+        return "ApplicationData{" +
+               "name='" + name + '\'' +
+               ", category=" + category +
+               ", rating=" + rating +
+               ", reviews=" + reviews +
+               ", size='" + size + '\'' +
+               ", installs=" + installs +
+               ", price=" + price +
+               ", lastUpdated=" + lastUpdated +
+               ", currentVersion='" + currentVersion + '\'' +
+               ", androidVersion='" + androidVersion + '\'' +
+               ", multiDevice=" + multiDevice +
+               '}';
     }
 
     @Override
