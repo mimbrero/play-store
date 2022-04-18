@@ -1,4 +1,4 @@
-package fp.googleplay.service;
+package fp.googleplay.analyzer;
 
 /**
  * Implemented with classic loops.

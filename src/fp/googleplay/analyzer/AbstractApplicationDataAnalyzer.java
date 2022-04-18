@@ -1,4 +1,4 @@
-package fp.googleplay.service;
+package fp.googleplay.analyzer;
 
 import fp.googleplay.ApplicationData;
 
