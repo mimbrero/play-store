@@ -40,7 +40,7 @@ public abstract class UnitTest {
     private void testMethod(Method method, TestResults results) {
         print("\n");
         printSeparator();
-        print("Test " + method.getName() + ":");
+        print("Test " + method.getName());
         printSeparator();
 
         try {

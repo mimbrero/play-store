@@ -26,7 +26,18 @@ public class ApplicationDataTest extends UnitTest {
                 "8.0", false
         );
 
-        print(data);
+        assertEquals(data.getName(), "Discord");
+        assertEquals(data.getCategory(), ApplicationCategory.COMMUNICATION);
+        assertEquals(data.getRating(), 4.7F);
+        assertEquals(data.getReviews(), 900_000);
+        assertEquals(data.getSize(), "200M");
+        assertEquals(data.getInstalls(), 1_000_000_000);
+        assertEquals(data.getPrice(), 0F);
+        assertEquals(data.getType(), ApplicationType.FREE);
+        assertEquals(data.getLastUpdated(), LocalDateTime.of(2021, 12, 29, 0, 0));
+        assertEquals(data.getCurrentVersion(), "v2.6");
+        assertEquals(data.getAndroidVersion(), "8.0");
+        assertEquals(data.getMultiDevice(), false);
     }
 
     // Prueba con name vacío
@@ -108,7 +119,7 @@ public class ApplicationDataTest extends UnitTest {
     @Test(5)
     public void getType_PriceIsZero_FREE() {
         ApplicationData data = MOCK;
-        assertThat(data.getType() == ApplicationType.FREE, "#getType() debería devolver FREE porque el precio es 0");
+        assertEquals(data.getType(), ApplicationType.FREE, "#getType() debería devolver FREE porque el precio es 0");
         print("Tipo = " + data.getType() + " (el precio es " + data.getPrice() + ").");
     }
 
@@ -118,7 +129,7 @@ public class ApplicationDataTest extends UnitTest {
         ApplicationData data = MOCK;
         LocalDateTime oneDayAfter = LocalDateTime.of(2021, 12, 30, 0, 0);
 
-        assertThat(data.getTimeSinceLastUpdate(oneDayAfter).equals(Duration.ofDays(1)), "el tiempo desde la última actualización debería de ser de 1 día");
+        assertEquals(data.getTimeSinceLastUpdate(oneDayAfter), Duration.ofDays(1), "el tiempo desde la última actualización debería de ser de 1 día");
         print("Tiempo desde la última actualización = " + data.getTimeSinceLastUpdate(oneDayAfter).toDays() + " días");
     }
 
@@ -154,7 +165,7 @@ public class ApplicationDataTest extends UnitTest {
         ApplicationData app2 = MOCK.clone();
 
         assertThat(app1 != app2, "app1 no debería ser el mismo objeto que app2");
-        assertThat(app1.equals(app2), "app1 debería ser igual que app2");
+        assertEquals(app1, app2, "app1 debería ser igual que app2");
         print("app1 es igual a app2");
     }
 
@@ -164,7 +175,7 @@ public class ApplicationDataTest extends UnitTest {
         ApplicationData app1 = MOCK.clone();
         ApplicationData app2 = MOCK.clone();
 
-        assertThat(app1.hashCode() == app2.hashCode(), "el hashCode de app1 debería ser igual al de app2");
+        assertEquals(app1.hashCode(), app2.hashCode(), "el hashCode de app1 debería ser igual al de app2");
         print("app1 tiene el mismo hashCode que app2");
     }
 

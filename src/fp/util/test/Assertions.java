@@ -27,6 +27,22 @@ public class Assertions {
     }
 
     /**
+     * Comprueba que los objetos pasados como argumentos son iguales.
+     */
+    public static void assertEquals(Object o1, Object o2) {
+        assertThat(o1.equals(o2));
+    }
+
+    /**
+     * Comprueba que los objetos pasados como argumentos son iguales.
+     *
+     * @param exceptionMessage mensaje que tendrá la excepción
+     */
+    public static void assertEquals(Object o1, Object o2, String exceptionMessage) {
+        assertThat(o1.equals(o2), exceptionMessage);
+    }
+
+    /**
      * Comprueba que el {@link Runnable} pasado como argumento lanza una excepción del tipo especificado.
      * Esto hace que la excepción no se lance.
      */
