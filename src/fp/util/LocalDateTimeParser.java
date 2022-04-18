@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class LocalDateTimeParser {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/y h:m");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/y H:m");
 
     private LocalDateTimeParser() {
         // Non instantiable static class
