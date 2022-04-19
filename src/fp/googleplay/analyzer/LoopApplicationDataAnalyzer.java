@@ -14,6 +14,14 @@ import java.util.Map;
  */
 public class LoopApplicationDataAnalyzer extends AbstractApplicationDataAnalyzer implements ApplicationDataAnalyzer {
 
+    public LoopApplicationDataAnalyzer() {
+        super();
+    }
+
+    public LoopApplicationDataAnalyzer(Collection<ApplicationData> data) {
+        super(data);
+    }
+
     @Override
     public Boolean existsAnAppWithHigherRatingForTheSameCategory(ApplicationData reference) {
         for (ApplicationData app : this.data) {
