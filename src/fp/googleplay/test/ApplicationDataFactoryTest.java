@@ -7,7 +7,9 @@ import fp.googleplay.ApplicationDataFactoryImpl;
 import fp.util.test.Test;
 import fp.util.test.UnitTest;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static fp.util.test.Assertions.*;
 
@@ -52,6 +54,14 @@ public class ApplicationDataFactoryTest extends UnitTest {
                 () -> factory.parse("Discord,INVALID,4.7,900000,200M,\"1,000,000,000+\",0,29/12/2021,00:00,v2.6,8.0,false"),
                 "the INVALID ApplicationCategory should not exist"
         );
+    }
+
+    @Test
+    public void parseCsv_AllFine() throws IOException {
+        List<ApplicationData> data = factory.parseCsv("data/mock-data.csv");
+
+        assertEquals(data.size(), 1000);
+        assertEquals(data.get(0).getName(), "Photo Editor & Candy Camera & Grid & ScrapBook");
     }
 
     public static void main(String[] args) {
