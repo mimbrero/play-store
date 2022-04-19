@@ -27,7 +27,7 @@ public class ApplicationDataFactoryImpl implements ApplicationDataFactory {
         Integer reviews = Integer.parseInt(parts.get(3));
         String size = parts.get(4);
         Integer installs = Integer.parseInt(parts.get(5).replaceAll("[,+]", "")); // removes ',' and '+' characters
-        Float price = Float.parseFloat(parts.get(6));
+        Float price = Float.parseFloat(parts.get(6).replaceAll("[€$]", "")); // removes '€' and '$' characters
         LocalDateTime lastUpdated = LocalDateTimeParser.parse(parts.get(7), parts.get(8));
         String version = parts.get(9);
         String androidVersion = parts.get(10);
