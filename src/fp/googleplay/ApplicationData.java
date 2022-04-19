@@ -48,11 +48,11 @@ public class ApplicationData implements Comparable<ApplicationData>, Cloneable {
                            String androidVersion, Boolean multiDevice) {
 
         Preconditions.checkArgument(!name.isEmpty(), "name no puede estar vacío");
-        Preconditions.checkArgument(rating != null && rating >= 0 && rating <= 5, "rating debe estar entre 0 y 5 ambos inclusive");
+        Preconditions.checkArgument(rating != null && (rating.isNaN() || rating >= 0 && rating <= 5), "rating debe estar entre 0 y 5 ambos inclusive");
         Preconditions.checkArgument(reviews != null && reviews >= 0, "reviews no puede ser negativo");
         Preconditions.checkArgument(installs != null && installs >= 0, "installs no puede ser negativo");
         Preconditions.checkArgument(!lastUpdated.isAfter(LocalDateTime.now()), "lastUpdated está en el futuro");
-        Preconditions.checkArgument(installs != null && installs > 0 || reviews != null && reviews == 0, "reviews debe ser 0 si installs es 0");
+        Preconditions.checkArgument(installs > 0 || reviews == 0, "reviews debe ser 0 si installs es 0");
 
         this.name = name;
         this.category = category;
