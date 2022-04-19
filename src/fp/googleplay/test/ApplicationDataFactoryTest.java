@@ -36,6 +36,8 @@ public class ApplicationDataFactoryTest extends UnitTest {
         assertEquals(data.getCurrentVersion(), "v2.6");
         assertEquals(data.getAndroidVersion(), "8.0");
         assertEquals(data.getMultiDevice(), false);
+
+        print(data);
     }
 
     @Test
@@ -45,6 +47,8 @@ public class ApplicationDataFactoryTest extends UnitTest {
                 () -> factory.parse("Discord,4.7,900000,200M"),
                 "the line should be invalid"
         );
+
+        print("Una línea sin los parámetros necesarios da error al parsear.");
     }
 
     @Test
@@ -54,6 +58,8 @@ public class ApplicationDataFactoryTest extends UnitTest {
                 () -> factory.parse("Discord,INVALID,4.7,900000,200M,\"1,000,000,000+\",0,29/12/2021,00:00,v2.6,8.0,false"),
                 "the INVALID ApplicationCategory should not exist"
         );
+
+        print("Una línea con una categoría no parseable da error al parsear.");
     }
 
     @Test
@@ -62,6 +68,8 @@ public class ApplicationDataFactoryTest extends UnitTest {
 
         assertEquals(data.size(), 1000);
         assertEquals(data.get(0).getName(), "Photo Editor & Candy Camera & Grid & ScrapBook");
+
+        print("Hay " + data.size() + " elementos en el CSV. El primero es " + data.get(0));
     }
 
     public static void main(String[] args) {
