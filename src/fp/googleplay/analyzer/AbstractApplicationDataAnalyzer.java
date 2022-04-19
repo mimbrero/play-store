@@ -1,9 +1,12 @@
 package fp.googleplay.analyzer;
 
+import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 
 public abstract class AbstractApplicationDataAnalyzer implements ApplicationDataAnalyzer {
@@ -40,6 +43,32 @@ public abstract class AbstractApplicationDataAnalyzer implements ApplicationData
     public void remove(ApplicationData data) {
         this.data.remove(data);
     }
+
+    @Override
+    public Collection<ApplicationData> filter(ApplicationCategory category) {
+        return this.filter(category, false);
+    }
+
+    @Override
+    public Collection<ApplicationData> filter(ApplicationCategory category, boolean multideviceNeeded) {
+        return this.filter(category, 0, 0, 0, LocalDateTime.MIN, multideviceNeeded);
+    }
+
+    @Override
+    public Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory() {
+        return this.groupByCategory(0, 0, 0, LocalDateTime.MIN, false);
+    }
+
+    protected boolean matches(ApplicationData app, float minRating, int minReviews, int minInstalls,
+                              LocalDateTime minLastUpdated, boolean multiDeviceNeeded) {
+        return app.getRating() >= minRating
+               && app.getReviews() >= minReviews
+               && app.getInstalls() >= minInstalls
+               && (app.getLastUpdated().isAfter(minLastUpdated) || app.getLastUpdated().isEqual(minLastUpdated))
+               && (app.getMultiDevice() || !multiDeviceNeeded);
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
