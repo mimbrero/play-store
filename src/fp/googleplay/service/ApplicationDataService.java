@@ -103,7 +103,7 @@ public interface ApplicationDataService {
      * @param minInstalls       the minimum installs that an app must have to be counted
      * @param minLastUpdated    the minimum last updated date that an app must have to be counted
      * @param multideviceNeeded if an app must be multidevice to be counted
-     * @return the map that groups the applications (values) by category (keys)
+     * @return the map that groups the applications (values) that match the criteria by category (keys)
      */
     Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory(float minRating, int minReviews, int minInstalls,
                                                                           LocalDateTime minLastUpdated, boolean multideviceNeeded);
