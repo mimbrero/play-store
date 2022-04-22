@@ -49,18 +49,18 @@ public interface ApplicationDataAnalyzer {
     Collection<ApplicationData> filter(ApplicationCategory category);
 
     /**
-     * @param category the category of the applications
+     * @param category          the category of the applications
      * @param multideviceNeeded if the applications need to be multidevice
      * @return the filtered collection
      */
     Collection<ApplicationData> filter(ApplicationCategory category, boolean multideviceNeeded);
 
     /**
-     * @param category the category of the applications
-     * @param minRating the minimum rating
-     * @param minReviews the minimum review count
-     * @param minInstalls the minimum installs
-     * @param minLastUpdated the minimum lastUpdated date
+     * @param category          the category of the applications
+     * @param minRating         the minimum rating
+     * @param minReviews        the minimum review count
+     * @param minInstalls       the minimum installs
+     * @param minLastUpdated    the minimum lastUpdated date
      * @param multideviceNeeded if the applications need to be multidevice
      * @return the filtered collection
      */
@@ -77,10 +77,10 @@ public interface ApplicationDataAnalyzer {
     Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory();
 
     /**
-     * @param minRating the minimum rating that an app must have to be counted
-     * @param minReviews the minimum reviews that an app must have to be counted
-     * @param minInstalls the minimum installs that an app must have to be counted
-     * @param minLastUpdated the minimum last updated date that an app must have to be counted
+     * @param minRating         the minimum rating that an app must have to be counted
+     * @param minReviews        the minimum reviews that an app must have to be counted
+     * @param minInstalls       the minimum installs that an app must have to be counted
+     * @param minLastUpdated    the minimum last updated date that an app must have to be counted
      * @param multideviceNeeded if an app must be multidevice to be counted
      * @return the map that groups the applications (values) by category (keys)
      */
@@ -94,5 +94,5 @@ public interface ApplicationDataAnalyzer {
     /**
      * @return the map that counts the installations (values) by category (keys)
      */
-    Map<ApplicationCategory, Integer> getInstallsByCategory();
+    Map<ApplicationCategory, Long> getInstallsByCategory();
 }

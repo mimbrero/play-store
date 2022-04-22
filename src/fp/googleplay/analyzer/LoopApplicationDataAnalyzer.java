@@ -4,10 +4,7 @@ import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Implemented with classic loops.
@@ -76,12 +73,12 @@ public class LoopApplicationDataAnalyzer extends AbstractApplicationDataAnalyzer
     }
 
     @Override
-    public Map<ApplicationCategory, Integer> getInstallsByCategory() {
-        Map<ApplicationCategory, Integer> map = new HashMap<>();
+    public Map<ApplicationCategory, Long> getInstallsByCategory() {
+        Map<ApplicationCategory, Long> map = new HashMap<>();
 
         for (ApplicationData app : this.data) {
             ApplicationCategory category = app.getCategory();
-            map.put(category, map.getOrDefault(category, 0) + app.getInstalls());
+            map.put(category, map.getOrDefault(category, 0L) + app.getInstalls());
         }
         return map;
     }
