@@ -2,8 +2,8 @@ package fp.googleplay.test;
 
 import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
-import fp.googleplay.ApplicationDataFactory;
-import fp.googleplay.ApplicationDataFactoryImpl;
+import fp.googleplay.factory.ApplicationDataFactory;
+import fp.googleplay.factory.ApplicationDataFactoryImpl;
 import fp.util.test.Test;
 import fp.util.test.UnitTest;
 

@@ -1,5 +1,7 @@
-package fp.googleplay;
+package fp.googleplay.factory;
 
+import fp.googleplay.ApplicationCategory;
+import fp.googleplay.ApplicationData;
 import fp.util.LocalDateTimeParser;
 import fp.util.Preconditions;
 
