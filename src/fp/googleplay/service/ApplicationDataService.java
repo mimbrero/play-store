@@ -55,7 +55,7 @@ public interface ApplicationDataService {
 
     /**
      * @param category the category of the apps to calculate the average
-     * @return the average rating for the given category
+     * @return the average rating for the given category. Returns 0 if there are no apps for that category.
      */
     Float calculateAverageRating(ApplicationCategory category);
 

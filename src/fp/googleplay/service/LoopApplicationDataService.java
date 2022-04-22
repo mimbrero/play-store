@@ -47,7 +47,7 @@ public class LoopApplicationDataService extends AbstractApplicationDataService i
             }
         }
 
-        return sum / size;
+        return size == 0 ? 0 : sum / size;
     }
 
     @Override
