@@ -4,8 +4,8 @@ import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
 import fp.googleplay.factory.ApplicationDataFactory;
 import fp.googleplay.factory.ApplicationDataFactoryImpl;
-import fp.googleplay.analyzer.ApplicationDataService;
-import fp.googleplay.analyzer.LoopApplicationDataService;
+import fp.googleplay.service.ApplicationDataService;
+import fp.googleplay.service.LoopApplicationDataService;
 import fp.util.test.Test;
 import fp.util.test.UnitTest;
 

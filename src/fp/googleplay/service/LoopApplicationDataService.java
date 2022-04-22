@@ -1,4 +1,4 @@
-package fp.googleplay.analyzer;
+package fp.googleplay.service;
 
 import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
