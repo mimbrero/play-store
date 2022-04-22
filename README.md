@@ -6,7 +6,17 @@ Autor/a: Alberto Sánchez Mimbrero uvus:albsanmim
 
 - **/src/fp/**: Directorio con el código fuente.
     - **googleplay/**: Paquete que contiene los tipos del proyecto.
+        - **factory/*: Paquete que contiene la factoría y su implementación del tipo base.
+            - **ApplicationDataFactory.java**: Interfaz para la factoría.
+            - **ApplicationDataFactoryImpl.java**: Implementación de la factoría.
+        - **service/**: Paquete que contiene el tipo contenedor y sus implementaciones.
+            - **AbstractApplicationDataService.java**: Clase abstracta que contiene los métodos comunes para todas las
+              implementaciones.
+            - **ApplicationDataService.java**: Interfaz para el tipo contenedor.
+            - **LoopApplicationDataService.java**: Implementación con bucles del tipo contenedor.
         - **test/**: Paquete que contiene las clases de test del proyecto.
+            - **ApplicationDataFactoryTest.java**: test del tipo `ApplicationDataFactory`.
+            - **ApplicationDataServiceTest.java**: test del tipo `ApplicationDataService`.
             - **ApplicationDataTest.java**: test del tipo `ApplicationData`.
         - **ApplicationCategory.java**: Enumerado con las categorías que puede tomar una aplicación.
         - **ApplicationData.java**: Tipo base del proyecto. Representa los datos de una aplicación alojada en Google
