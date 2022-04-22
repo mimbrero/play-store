@@ -9,13 +9,20 @@ import java.util.*;
 /**
  * Implemented with classic loops.
  */
-public class LoopApplicationDataAnalyzer extends AbstractApplicationDataAnalyzer implements ApplicationDataAnalyzer {
+public class LoopApplicationDataService extends AbstractApplicationDataService implements ApplicationDataService {
 
-    public LoopApplicationDataAnalyzer() {
+    /**
+     * Creates an instance with an empty {@link ArrayList} of {@link ApplicationData}.
+     */
+    public LoopApplicationDataService() {
         super();
     }
 
-    public LoopApplicationDataAnalyzer(Collection<ApplicationData> data) {
+    /**
+     * Creates an instance with the given data.
+     * @param data the data to work with
+     */
+    public LoopApplicationDataService(Collection<ApplicationData> data) {
         super(data);
     }
 

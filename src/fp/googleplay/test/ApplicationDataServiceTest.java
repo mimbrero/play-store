@@ -4,8 +4,8 @@ import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
 import fp.googleplay.factory.ApplicationDataFactory;
 import fp.googleplay.factory.ApplicationDataFactoryImpl;
-import fp.googleplay.analyzer.ApplicationDataAnalyzer;
-import fp.googleplay.analyzer.LoopApplicationDataAnalyzer;
+import fp.googleplay.analyzer.ApplicationDataService;
+import fp.googleplay.analyzer.LoopApplicationDataService;
 import fp.util.test.Test;
 import fp.util.test.UnitTest;
 
@@ -18,15 +18,15 @@ import java.util.Map;
 import static fp.util.test.Assertions.assertEquals;
 import static fp.util.test.Assertions.assertThat;
 
-public class ApplicationDataAnalyzerTest extends UnitTest {
+public class ApplicationDataServiceTest extends UnitTest {
 
-    private final ApplicationDataAnalyzer analyzer;
+    private final ApplicationDataService service;
     private final List<ApplicationData> mockData;
 
-    public ApplicationDataAnalyzerTest(ApplicationDataFactory applicationDataFactory, ApplicationDataAnalyzer analyzer) throws IOException {
-        this.analyzer = analyzer;
+    public ApplicationDataServiceTest(ApplicationDataFactory applicationDataFactory, ApplicationDataService service) throws IOException {
+        this.service = service;
         this.mockData = applicationDataFactory.parseCsv("data/mock-data.csv");
-        analyzer.add(this.mockData);
+        service.add(this.mockData);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ApplicationDataAnalyzerTest extends UnitTest {
         ApplicationData app = this.mockData.get(0);
         assertEquals(app.getName(), "Photo Editor & Candy Camera & Grid & ScrapBook");
 
-        Boolean exists = analyzer.existsAnAppWithHigherRatingForTheSameCategory(this.mockData.get(0));
+        Boolean exists = service.existsAnAppWithHigherRatingForTheSameCategory(this.mockData.get(0));
         assertThat(exists, "there should be an app with higher rating than " + app.getName());
 
         if (exists)
@@ -43,13 +43,13 @@ public class ApplicationDataAnalyzerTest extends UnitTest {
 
     @Test(1)
     public void calculateAverageRating_COMMUNICATION() {
-        Float averageRating = analyzer.calculateAverageRating(ApplicationCategory.COMMUNICATION);
+        Float averageRating = service.calculateAverageRating(ApplicationCategory.COMMUNICATION);
         print("La media de las valoraciones de las aplicaciones de tipo COMMUNICATION es " + averageRating);
     }
 
     @Test(2)
     public void filter_AllParameters_17Elements() {
-        Collection<ApplicationData> filtered = analyzer.filter(
+        Collection<ApplicationData> filtered = service.filter(
                 ApplicationCategory.COMMUNICATION, 3.4F, 500, 100_000,
                 LocalDateTime.of(2021, 2, 10, 0, 0), false
         );
@@ -63,7 +63,7 @@ public class ApplicationDataAnalyzerTest extends UnitTest {
 
     @Test(3)
     public void groupByCategory_COMMUNICATIONHas17Elements() {
-        Map<ApplicationCategory, Collection<ApplicationData>> grouped = analyzer.groupByCategory(
+        Map<ApplicationCategory, Collection<ApplicationData>> grouped = service.groupByCategory(
                 3.4F, 500, 100_000,
                 LocalDateTime.of(2021, 2, 10, 0, 0), false
         );
@@ -85,7 +85,7 @@ public class ApplicationDataAnalyzerTest extends UnitTest {
 
     @Test(4)
     public void getInstallsByCategory() {
-        Map<ApplicationCategory, Long> installs = analyzer.getInstallsByCategory();
+        Map<ApplicationCategory, Long> installs = service.getInstallsByCategory();
 
         assertEquals(installs.get(ApplicationCategory.COMMUNICATION), 22367710000L);
         assertEquals(installs.get(ApplicationCategory.ENTERTAINMENT), 2839060000L);
@@ -96,8 +96,8 @@ public class ApplicationDataAnalyzerTest extends UnitTest {
 
     public static void main(String[] args) throws IOException {
         ApplicationDataFactory factory = new ApplicationDataFactoryImpl();
-        ApplicationDataAnalyzer analyzer = new LoopApplicationDataAnalyzer();
+        ApplicationDataService analyzer = new LoopApplicationDataService();
 
-        new ApplicationDataAnalyzerTest(factory, analyzer).init();
+        new ApplicationDataServiceTest(factory, analyzer).init();
     }
 }

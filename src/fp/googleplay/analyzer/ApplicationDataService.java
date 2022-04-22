@@ -7,20 +7,41 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Map;
 
-// "analyzer" and not service as it stores the data to work with.
-public interface ApplicationDataAnalyzer {
+// not actually a service as it stores the data to work with, but we'll stick with this
+public interface ApplicationDataService {
 
+    // ----------------------------------------------------------
+    // DATA MANAGEMENT
+    // ----------------------------------------------------------
+
+    /**
+     * @return the number of elements stored to work with
+     */
     Integer getDataSize();
 
+    /**
+     * Adds an {@link ApplicationData} to work with.
+     * @param data the {@link ApplicationData} to add
+     * @see #add(Collection)
+     */
     void add(ApplicationData data);
-
+    
+    /**
+     * Adds multiple {@link ApplicationData} to work with.
+     * @param data the collection of {@link ApplicationData} to add
+     * @see #add(ApplicationData)
+     */
     void add(Collection<ApplicationData> data);
 
+    /**
+     * Removes the given {@link ApplicationData} from the internal collection.
+     * @param data the {@link ApplicationData} to stop working with
+     */
     void remove(ApplicationData data);
 
-    //
+    // ----------------------------------------------------------
     // METHOD 1
-    //
+    // ----------------------------------------------------------
 
     /**
      * @param applicationData app to check if there is another one of the same category and a higher rating
@@ -28,9 +49,9 @@ public interface ApplicationDataAnalyzer {
      */
     Boolean existsAnAppWithHigherRatingForTheSameCategory(ApplicationData applicationData);
 
-    //
+    // ----------------------------------------------------------
     // METHOD 2
-    //
+    // ----------------------------------------------------------
 
     /**
      * @param category the category of the apps to calculate the average
@@ -38,9 +59,9 @@ public interface ApplicationDataAnalyzer {
      */
     Float calculateAverageRating(ApplicationCategory category);
 
-    //
+    // ----------------------------------------------------------
     // METHOD 3
-    //
+    // ----------------------------------------------------------
 
     /**
      * @param category the category of the applications
@@ -67,9 +88,9 @@ public interface ApplicationDataAnalyzer {
     Collection<ApplicationData> filter(ApplicationCategory category, float minRating, int minReviews, int minInstalls,
                                        LocalDateTime minLastUpdated, boolean multideviceNeeded);
 
-    //
+    // ----------------------------------------------------------
     // METHOD 4
-    //
+    // ----------------------------------------------------------
 
     /**
      * @return the map that groups the applications (values) by category (keys)
@@ -87,9 +108,9 @@ public interface ApplicationDataAnalyzer {
     Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory(float minRating, int minReviews, int minInstalls,
                                                                           LocalDateTime minLastUpdated, boolean multideviceNeeded);
 
-    //
+    // ----------------------------------------------------------
     // METHOD 5
-    //
+    // ----------------------------------------------------------
 
     /**
      * @return the map that counts the installations (values) by category (keys)

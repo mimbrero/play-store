@@ -9,20 +9,28 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-public abstract class AbstractApplicationDataAnalyzer implements ApplicationDataAnalyzer {
+public abstract class AbstractApplicationDataService implements ApplicationDataService {
 
     protected final Collection<ApplicationData> data;
 
     /**
      * Creates an instance with an empty {@link ArrayList} of {@link ApplicationData}.
      */
-    public AbstractApplicationDataAnalyzer() {
+    public AbstractApplicationDataService() {
         this(new ArrayList<>());
     }
 
-    public AbstractApplicationDataAnalyzer(Collection<ApplicationData> data) {
+    /**
+     * Creates an instance with the given data.
+     * @param data the data to work with
+     */
+    public AbstractApplicationDataService(Collection<ApplicationData> data) {
         this.data = data;
     }
+
+    // ----------------------------------------------------------
+    // DATA MANAGEMENT
+    // ----------------------------------------------------------
 
     @Override
     public Integer getDataSize() {
@@ -44,6 +52,10 @@ public abstract class AbstractApplicationDataAnalyzer implements ApplicationData
         this.data.remove(data);
     }
 
+    // ----------------------------------------------------------
+    // OVERLOAD
+    // ----------------------------------------------------------
+
     @Override
     public Collection<ApplicationData> filter(ApplicationCategory category) {
         return this.filter(category, false);
@@ -58,6 +70,10 @@ public abstract class AbstractApplicationDataAnalyzer implements ApplicationData
     public Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory() {
         return this.groupByCategory(0, 0, 0, LocalDateTime.MIN, false);
     }
+
+    // ----------------------------------------------------------
+    // UTIL
+    // ----------------------------------------------------------
 
     protected boolean matches(ApplicationData app, float minRating, int minReviews, int minInstalls,
                               LocalDateTime minLastUpdated, boolean multiDeviceNeeded) {
@@ -74,7 +90,7 @@ public abstract class AbstractApplicationDataAnalyzer implements ApplicationData
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractApplicationDataAnalyzer that = (AbstractApplicationDataAnalyzer) o;
+        AbstractApplicationDataService that = (AbstractApplicationDataService) o;
         return Objects.equals(data, that.data);
     }
 
