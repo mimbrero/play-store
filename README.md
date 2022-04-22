@@ -6,7 +6,7 @@ Autor/a: Alberto Sánchez Mimbrero uvus:albsanmim
 
 - **/src/fp/**: Directorio con el código fuente.
     - **googleplay/**: Paquete que contiene los tipos del proyecto.
-        - **factory/*: Paquete que contiene la factoría y su implementación del tipo base.
+        - **factory/**: Paquete que contiene la factoría y su implementación del tipo base.
             - **ApplicationDataFactory.java**: Interfaz para la factoría.
             - **ApplicationDataFactoryImpl.java**: Implementación de la factoría.
         - **service/**: Paquete que contiene el tipo contenedor y sus implementaciones.
