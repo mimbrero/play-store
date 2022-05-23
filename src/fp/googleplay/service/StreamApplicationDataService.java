@@ -47,7 +47,7 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
                 .filter(data -> data.getCategory().equals(category))
                 .mapToDouble(ApplicationData::getRating)
                 .average()
-                .orElse(Double.NaN);
+                .orElse(0);
     }
 
     @Override
