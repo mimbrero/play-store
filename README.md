@@ -14,10 +14,13 @@ Autor/a: Alberto Sánchez Mimbrero uvus:albsanmim
               implementaciones.
             - **ApplicationDataService.java**: Interfaz para el tipo contenedor.
             - **LoopApplicationDataService.java**: Implementación con bucles del tipo contenedor.
+            - **StreamApplicationDataService.java**: Implementación con streams del tipo contenedor.
         - **test/**: Paquete que contiene las clases de test del proyecto.
             - **ApplicationDataFactoryTest.java**: test del tipo `ApplicationDataFactory`.
-            - **ApplicationDataServiceTest.java**: test del tipo `ApplicationDataService`.
+            - **ApplicationDataServiceTest.java**: test del tipo `ApplicationDataService` (abstracta).
             - **ApplicationDataTest.java**: test del tipo `ApplicationData`.
+            - **LoopApplicationDataServiceTest.java**: test del tipo `LoopApplicationDataService`.
+            - **StreamApplicationDataServiceTest.java**: test del tipo `StreamApplicationDataService`.
         - **ApplicationCategory.java**: Enumerado con las categorías que puede tomar una aplicación.
         - **ApplicationData.java**: Tipo base del proyecto. Representa los datos de una aplicación alojada en Google
           Play.
@@ -155,12 +158,16 @@ a `AbstractApplicationDataService`.
 
 - **C1**: Constructor por defecto. Asigna a **data** una `ArrayList` vacía.
 - **C2**: Constructor con un parámetro de tipo `Collection<ApplicationData>`. Asigna a **data** esa colección.
+- **C3**: Constructor con un parámetro de tipo `Stream<ApplicationData>`. Asigna a **data** los elementos de ese stream.
 
 **Criterio de igualdad (en AbstractApplicationDataService):**
 
 Dos `ApplicationDataService` son iguales si lo son sus propiedades **data**.
 
 **Métodos**:
+
+Los últimos 6 métodos no tienen implementación en `LoopApplicationDataService` y lanzarán
+una `UnsupportedOperationException` si se ejecutan desde esta implementación.
 
 - **Boolean existsAnAppWithHigherRatingForTheSameCategory(ApplicationData applicationData)**: devuelve `true` si existe
   alguna aplicación con más valoración de la misma categoría que la pasada como argumento.
@@ -176,6 +183,22 @@ Dos `ApplicationDataService` son iguales si lo son sus propiedades **data**.
   fecha de última actualización y, si necesita ser multidevice, si lo es.
 - **Map<ApplicationCategory, Long> getInstallsByCategory()**: devuelve un mapa donde las claves son categorías y los
   valores son la suma de las instalaciones de todas las aplicaciones de esa categoría.
+- **ApplicationData getMostPopularApplication(ApplicationCategory category, float minRating, int minReviews,
+  LocalDateTime minLastUpdated, boolean multideviceNeeded)**: devuelve la aplicación con más descargas que cumpla como
+  requisito una mínima valoración, mínimo número de valoraciones, última fecha de actualización y, si necesita ser
+  multidevice, si lo es.
+- **List\<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews)**: devuelve una lista con
+  las aplicaciones que sean de la categoría y tengan como mínimo el número de valoraciones pasados como argumento,
+  ordenada de mayor a menor valoración.
+- **List\<ApplicationData> getLastUpdatedApplications(int n)**: devuelve una lista con n aplicaciones ordenadas de mayor
+  a menor fecha de última actualización.
+- **Map<ApplicationCategory, ApplicationData> getLastUpdatedApplicationsByCategory()**: devuelve un mapa donde las
+  claves son categorías y, como valor, la última aplicación actualizada de esa categoría.
+- **SortedMap<ApplicationCategory, List<ApplicationData>> getMostPopularApplicationsByCategory(int n)**: devuelve un
+  mapa donde las claves son categorías y los valores son listas de las n aplicaciones ordenadas de mayor a menor número
+  de instalaciones.
+- **ApplicationCategory getCategoryWithMostInstallations()**: devuelve la categoría con más instalaciones acumuladas
+  entre todas sus aplicaciones.
 
 ## Útiles
 
