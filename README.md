@@ -142,10 +142,14 @@ Clase de factoría para construir objetos de tipo `ApplicationData`.
 - **List\<ApplicationData> parseCsv(String filePath) throws IOException**: Parsea un archivo CSV con el formato
   explicado en el método anterior en sus líneas y las devuelve en una lista de `ApplicationData`.
 
+- **ApplicationDataService parseCsv(String filePath, Implementation implementation) throws IOException**: un archivo CSV
+  con el formato explicado en el método anterior en sus líneas y devuelve una instancia de `ApplicationDataService` con
+  la implementación pasada como argumento.
+
 ### Tipo contenedor - ApplicationDataService
 
-Clase contenedora de los objetos de tipo `ApplicationData`. La implementa `LoopApplicationDataService` extendiendo
-a `AbstractApplicationDataService`.
+Clase contenedora de los objetos de tipo `ApplicationData`. La implementan `LoopApplicationDataService`
+y `StreamApplicationDataService` extendiendo a `AbstractApplicationDataService`.
 
 **Propiedades:**
 
