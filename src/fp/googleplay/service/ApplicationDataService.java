@@ -135,4 +135,14 @@ public interface ApplicationDataService {
     ApplicationData getMostPopularApplication(ApplicationCategory category, float minRating, int minReviews,
                                               LocalDateTime minLastUpdated, boolean multideviceNeeded);
 
+    // ----------------------------------------------------------
+    // METHOD 10
+    // ----------------------------------------------------------
+
+    /**
+     * @param category   the category of the applications
+     * @param minReviews the minimum reviews that an app must have to be counted
+     * @return the filtered collection sorted by rating (descending)
+     */
+    Collection<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews);
 }

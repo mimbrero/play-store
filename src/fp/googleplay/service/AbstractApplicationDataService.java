@@ -98,6 +98,11 @@ public abstract class AbstractApplicationDataService implements ApplicationDataS
     }
 
     @Override
+    public Collection<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -83,4 +83,13 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
                 .max(Comparator.comparingInt(ApplicationData::getInstalls))
                 .orElse(null);
     }
+
+    @Override
+    public Collection<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews) {
+        return this.data.stream()
+                .filter(app -> app.getCategory().equals(category))
+                .filter(app -> app.getReviews() >= minReviews)
+                .sorted(Comparator.comparingDouble(ApplicationData::getRating).reversed())
+                .toList();
+    }
 }
