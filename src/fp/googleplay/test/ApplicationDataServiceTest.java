@@ -3,9 +3,7 @@ package fp.googleplay.test;
 import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
 import fp.googleplay.factory.ApplicationDataFactory;
-import fp.googleplay.factory.ApplicationDataFactoryImpl;
 import fp.googleplay.service.ApplicationDataService;
-import fp.googleplay.service.LoopApplicationDataService;
 import fp.util.test.Test;
 import fp.util.test.UnitTest;
 
@@ -20,8 +18,8 @@ import static fp.util.test.Assertions.assertThat;
 
 public abstract class ApplicationDataServiceTest extends UnitTest {
 
-    private final ApplicationDataService service;
-    private final List<ApplicationData> mockData;
+    protected final ApplicationDataService service;
+    protected final List<ApplicationData> mockData;
 
     public ApplicationDataServiceTest(ApplicationDataFactory applicationDataFactory, ApplicationDataService service) throws IOException {
         this.service = service;
