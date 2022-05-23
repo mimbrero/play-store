@@ -2,6 +2,9 @@ package fp.googleplay.factory;
 
 import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
+import fp.googleplay.service.ApplicationDataService;
+import fp.googleplay.service.LoopApplicationDataService;
+import fp.googleplay.service.StreamApplicationDataService;
 import fp.util.LocalDateTimeParser;
 import fp.util.Preconditions;
 
@@ -46,5 +49,13 @@ public class ApplicationDataFactoryImpl implements ApplicationDataFactory {
                 .skip(1) // skip the first line, the header
                 .map(this::parse)
                 .toList();
+    }
+
+    @Override
+    public ApplicationDataService parseCsv(String filePath, Implementation implementation) throws IOException {
+        return switch (implementation) {
+            case LOOP -> new LoopApplicationDataService(this.parseCsv(filePath).stream());
+            case STREAM -> new StreamApplicationDataService(this.parseCsv(filePath).stream());
+        };
     }
 }
