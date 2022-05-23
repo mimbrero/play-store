@@ -59,7 +59,7 @@ public interface ApplicationDataService {
 
     /**
      * @param category the category of the apps to calculate the average
-     * @return the average rating for the given category
+     * @return the average rating for the given category. Returns 0 if there are no apps for that category.
      */
     Double calculateAverageRating(ApplicationCategory category);
 
@@ -107,7 +107,7 @@ public interface ApplicationDataService {
      * @param minInstalls       the minimum installs that an app must have to be counted
      * @param minLastUpdated    the minimum last updated date that an app must have to be counted
      * @param multideviceNeeded if an app must be multidevice to be counted
-     * @return the map that groups the applications (values) by category (keys)
+     * @return the map that groups the applications (values) that match the criteria by category (keys)
      */
     Map<ApplicationCategory, List<ApplicationData>> groupByCategory(float minRating, int minReviews, int minInstalls,
                                                                     LocalDateTime minLastUpdated, boolean multideviceNeeded);

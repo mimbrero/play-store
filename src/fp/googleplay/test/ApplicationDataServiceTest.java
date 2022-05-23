@@ -94,10 +94,15 @@ public class ApplicationDataServiceTest extends UnitTest {
         print("Las aplicaciones de tipo entretenimiento suman " + installs.get(ApplicationCategory.ENTERTAINMENT) + " instalaciones.");
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ApplicationDataFactory factory = new ApplicationDataFactoryImpl();
         ApplicationDataService analyzer = new LoopApplicationDataService();
 
-        new ApplicationDataServiceTest(factory, analyzer).init();
+        try {
+            new ApplicationDataServiceTest(factory, analyzer).init();
+        } catch (IOException e) {
+            System.out.println("Ha habido un error relacionado al archivo CSV para hacer pruebas:");
+            e.printStackTrace();
+        }
     }
 }
