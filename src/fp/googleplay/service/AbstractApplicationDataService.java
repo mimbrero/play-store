@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public abstract class AbstractApplicationDataService implements ApplicationDataService {
 
@@ -26,6 +27,14 @@ public abstract class AbstractApplicationDataService implements ApplicationDataS
      */
     public AbstractApplicationDataService(Collection<ApplicationData> data) {
         this.data = data;
+    }
+
+    /**
+     * Creates an instance with the given data.
+     * @param data the data to work with
+     */
+    public AbstractApplicationDataService(Stream<ApplicationData> data) {
+        this(data.toList());
     }
 
     // ----------------------------------------------------------

@@ -5,6 +5,7 @@ import fp.googleplay.ApplicationData;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Implemented with classic loops.
@@ -23,6 +24,14 @@ public class LoopApplicationDataService extends AbstractApplicationDataService i
      * @param data the data to work with
      */
     public LoopApplicationDataService(Collection<ApplicationData> data) {
+        super(data);
+    }
+
+    /**
+     * Creates an instance with the given data.
+     * @param data the data to work with
+     */
+    public LoopApplicationDataService(Stream<ApplicationData> data) {
         super(data);
     }
 
