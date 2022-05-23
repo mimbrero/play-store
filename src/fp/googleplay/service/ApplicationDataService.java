@@ -169,4 +169,13 @@ public interface ApplicationDataService {
      * @return a map with a list of the top n applications by installs (values) by category (keys)
      */
     SortedMap<ApplicationCategory, List<ApplicationData>> getMostPopularApplicationsByCategory(int n);
+
+    // ----------------------------------------------------------
+    // METHOD 15
+    // ----------------------------------------------------------
+
+    /**
+     * @return the category that has the most accumulated installations among its applications
+     */
+    ApplicationCategory getCategoryWithMostInstallations();
 }

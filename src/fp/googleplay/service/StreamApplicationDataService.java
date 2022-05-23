@@ -117,4 +117,12 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
                         Collectors.collectingAndThen(Collectors.toList(), list -> list.size() > n ? list.subList(0, n) : list)
                 ));
     }
+
+    @Override
+    public ApplicationCategory getCategoryWithMostInstallations() {
+        return this.getInstallsByCategory().entrySet().stream()
+                .max(Comparator.comparingLong(Map.Entry::getValue))
+                .map(Map.Entry::getKey)
+                .orElse(null);
+    }
 }
