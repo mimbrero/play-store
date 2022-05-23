@@ -103,6 +103,11 @@ public abstract class AbstractApplicationDataService implements ApplicationDataS
     }
 
     @Override
+    public List<ApplicationData> getLastUpdatedApplications(int n) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public Map<ApplicationCategory, ApplicationData> getLastUpdatedApplicationsByCategory() {
         throw new UnsupportedOperationException();
     }

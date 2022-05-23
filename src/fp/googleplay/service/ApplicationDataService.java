@@ -151,6 +151,8 @@ public interface ApplicationDataService {
     // METHOD 12
     // ----------------------------------------------------------
 
+    List<ApplicationData> getLastUpdatedApplications(int n);
+
     // ----------------------------------------------------------
     // METHOD 13
     // ----------------------------------------------------------

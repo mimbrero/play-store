@@ -98,6 +98,13 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
     }
 
     @Override
+    public List<ApplicationData> getLastUpdatedApplications(int n) {
+        return this.data.stream()
+                .sorted(Comparator.comparing(ApplicationData::getLastUpdated).reversed())
+                .collect(Collectors.collectingAndThen(Collectors.toList(), list -> list.size() > n ? list.subList(0, n) : list));
+    }
+
+    @Override
     public Map<ApplicationCategory, ApplicationData> getLastUpdatedApplicationsByCategory() {
         return this.data.stream()
                 .collect(Collectors.toMap(
