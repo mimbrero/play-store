@@ -106,4 +106,15 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
                         BinaryOperator.maxBy(Comparator.comparing(ApplicationData::getLastUpdated))
                 ));
     }
+
+    @Override
+    public SortedMap<ApplicationCategory, List<ApplicationData>> getMostPopularApplicationsByCategory(int n) {
+        return this.data.stream()
+                .sorted(Comparator.comparingInt(ApplicationData::getInstalls))
+                .collect(Collectors.groupingBy(
+                        ApplicationData::getCategory,
+                        TreeMap::new,
+                        Collectors.collectingAndThen(Collectors.toList(), list -> list.size() > n ? list.subList(0, n) : list)
+                ));
+    }
 }

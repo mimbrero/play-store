@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 
 // not actually a service as it stores the data to work with, but we'll stick with this
 public interface ApplicationDataService {
@@ -158,4 +159,14 @@ public interface ApplicationDataService {
      * @return the last updated application (values) by every category (keys)
      */
     Map<ApplicationCategory, ApplicationData> getLastUpdatedApplicationsByCategory();
+
+    // ----------------------------------------------------------
+    // METHOD 14
+    // ----------------------------------------------------------
+
+    /**
+     * @param n the number of applications to get by each category
+     * @return a map with a list of the top n applications by installs (values) by category (keys)
+     */
+    SortedMap<ApplicationCategory, List<ApplicationData>> getMostPopularApplicationsByCategory(int n);
 }
