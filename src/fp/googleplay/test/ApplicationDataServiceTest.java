@@ -43,7 +43,7 @@ public class ApplicationDataServiceTest extends UnitTest {
 
     @Test(1)
     public void calculateAverageRating_COMMUNICATION() {
-        Float averageRating = service.calculateAverageRating(ApplicationCategory.COMMUNICATION);
+        Double averageRating = service.calculateAverageRating(ApplicationCategory.COMMUNICATION);
         print("La media de las valoraciones de las aplicaciones de tipo COMMUNICATION es " + averageRating);
     }
 
@@ -63,7 +63,7 @@ public class ApplicationDataServiceTest extends UnitTest {
 
     @Test(3)
     public void groupByCategory_COMMUNICATIONHas17Elements() {
-        Map<ApplicationCategory, Collection<ApplicationData>> grouped = service.groupByCategory(
+        Map<ApplicationCategory, List<ApplicationData>> grouped = service.groupByCategory(
                 3.4F, 500, 100_000,
                 LocalDateTime.of(2021, 2, 10, 0, 0), false
         );
@@ -75,7 +75,7 @@ public class ApplicationDataServiceTest extends UnitTest {
         printGroupByCategory(grouped, ApplicationCategory.ENTERTAINMENT);
     }
 
-    private void printGroupByCategory(Map<ApplicationCategory, Collection<ApplicationData>> grouped, ApplicationCategory category) {
+    private void printGroupByCategory(Map<ApplicationCategory, List<ApplicationData>> grouped, ApplicationCategory category) {
         Collection<ApplicationData> data = grouped.get(category);
 
         print("Hay " + data.size() + " aplicaciones de " + category + " que tengan al menos 3.4 puntos de valoración, " +

@@ -5,6 +5,7 @@ import fp.googleplay.ApplicationData;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 // not actually a service as it stores the data to work with, but we'll stick with this
@@ -57,7 +58,7 @@ public interface ApplicationDataService {
      * @param category the category of the apps to calculate the average
      * @return the average rating for the given category
      */
-    Float calculateAverageRating(ApplicationCategory category);
+    Double calculateAverageRating(ApplicationCategory category);
 
     // ----------------------------------------------------------
     // METHOD 3
@@ -95,7 +96,7 @@ public interface ApplicationDataService {
     /**
      * @return the map that groups the applications (values) by category (keys)
      */
-    Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory();
+    Map<ApplicationCategory, List<ApplicationData>> groupByCategory();
 
     /**
      * @param minRating         the minimum rating that an app must have to be counted
@@ -105,8 +106,8 @@ public interface ApplicationDataService {
      * @param multideviceNeeded if an app must be multidevice to be counted
      * @return the map that groups the applications (values) by category (keys)
      */
-    Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory(float minRating, int minReviews, int minInstalls,
-                                                                          LocalDateTime minLastUpdated, boolean multideviceNeeded);
+    Map<ApplicationCategory, List<ApplicationData>> groupByCategory(float minRating, int minReviews, int minInstalls,
+                                                                    LocalDateTime minLastUpdated, boolean multideviceNeeded);
 
     // ----------------------------------------------------------
     // METHOD 5

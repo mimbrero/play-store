@@ -4,10 +4,7 @@ import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 public abstract class AbstractApplicationDataService implements ApplicationDataService {
@@ -76,7 +73,7 @@ public abstract class AbstractApplicationDataService implements ApplicationDataS
     }
 
     @Override
-    public Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory() {
+    public Map<ApplicationCategory, List<ApplicationData>> groupByCategory() {
         return this.groupByCategory(0, 0, 0, LocalDateTime.MIN, false);
     }
 

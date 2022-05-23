@@ -45,8 +45,8 @@ public class LoopApplicationDataService extends AbstractApplicationDataService i
     }
 
     @Override
-    public Float calculateAverageRating(ApplicationCategory category) {
-        float sum = 0;
+    public Double calculateAverageRating(ApplicationCategory category) {
+        double sum = 0;
         int size = 0;
 
         for (ApplicationData app : this.data) {
@@ -72,9 +72,9 @@ public class LoopApplicationDataService extends AbstractApplicationDataService i
     }
 
     @Override
-    public Map<ApplicationCategory, Collection<ApplicationData>> groupByCategory(float minRating, int minReviews, int minInstalls,
-                                                                                 LocalDateTime minLastUpdated, boolean multideviceNeeded) {
-        Map<ApplicationCategory, Collection<ApplicationData>> map = new HashMap<>();
+    public Map<ApplicationCategory, List<ApplicationData>> groupByCategory(float minRating, int minReviews, int minInstalls,
+                                                                           LocalDateTime minLastUpdated, boolean multideviceNeeded) {
+        Map<ApplicationCategory, List<ApplicationData>> map = new HashMap<>();
 
         for (ApplicationData app : this.data) {
             if (!this.matches(app, minRating, minReviews, minInstalls, minLastUpdated, multideviceNeeded))
