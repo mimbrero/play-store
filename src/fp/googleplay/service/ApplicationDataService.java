@@ -132,6 +132,7 @@ public interface ApplicationDataService {
      * @param minLastUpdated    the minimum last updated date that an app must have to be counted
      * @param multideviceNeeded if an app must be multidevice to be counted
      * @return the app with the most installs that matches the requirements
+     * @throws UnsupportedOperationException if the current implementation does not support doing this
      */
     ApplicationData getMostPopularApplication(ApplicationCategory category, float minRating, int minReviews,
                                               LocalDateTime minLastUpdated, boolean multideviceNeeded);
@@ -144,6 +145,7 @@ public interface ApplicationDataService {
      * @param category   the category of the applications
      * @param minReviews the minimum reviews that an app must have to be counted
      * @return the filtered collection sorted by rating (descending)
+     * @throws UnsupportedOperationException if the current implementation does not support doing this
      */
     List<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews);
 
@@ -154,6 +156,7 @@ public interface ApplicationDataService {
     /**
      * @param n the number of applications to get
      * @return the last n applications sorted by last updated (descending)
+     * @throws UnsupportedOperationException if the current implementation does not support doing this
      */
     List<ApplicationData> getLastUpdatedApplications(int n);
 
@@ -163,6 +166,7 @@ public interface ApplicationDataService {
 
     /**
      * @return the last updated application (values) by every category (keys)
+     * @throws UnsupportedOperationException if the current implementation does not support doing this
      */
     Map<ApplicationCategory, ApplicationData> getLastUpdatedApplicationsByCategory();
 
@@ -173,6 +177,7 @@ public interface ApplicationDataService {
     /**
      * @param n the number of applications to get by each category
      * @return a map with a list of the top n applications by installs (values) by category (keys)
+     * @throws UnsupportedOperationException if the current implementation does not support doing this
      */
     SortedMap<ApplicationCategory, List<ApplicationData>> getMostPopularApplicationsByCategory(int n);
 
@@ -182,6 +187,7 @@ public interface ApplicationDataService {
 
     /**
      * @return the category that has the most accumulated installations among its applications
+     * @throws UnsupportedOperationException if the current implementation does not support doing this
      */
     ApplicationCategory getCategoryWithMostInstallations();
 }
