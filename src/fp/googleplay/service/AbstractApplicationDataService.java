@@ -93,6 +93,11 @@ public abstract class AbstractApplicationDataService implements ApplicationDataS
 
 
     @Override
+    public ApplicationData getMostPopularApplication(ApplicationCategory category, float minRating, int minReviews, LocalDateTime minLastUpdated, boolean multideviceNeeded) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

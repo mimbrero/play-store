@@ -22,13 +22,15 @@ public interface ApplicationDataService {
 
     /**
      * Adds an {@link ApplicationData} to work with.
+     *
      * @param data the {@link ApplicationData} to add
      * @see #add(Collection)
      */
     void add(ApplicationData data);
-    
+
     /**
      * Adds multiple {@link ApplicationData} to work with.
+     *
      * @param data the collection of {@link ApplicationData} to add
      * @see #add(ApplicationData)
      */
@@ -36,12 +38,13 @@ public interface ApplicationDataService {
 
     /**
      * Removes the given {@link ApplicationData} from the internal collection.
+     *
      * @param data the {@link ApplicationData} to stop working with
      */
     void remove(ApplicationData data);
 
     // ----------------------------------------------------------
-    // METHOD 1
+    // METHOD 1/6
     // ----------------------------------------------------------
 
     /**
@@ -51,7 +54,7 @@ public interface ApplicationDataService {
     Boolean existsAnAppWithHigherRatingForTheSameCategory(ApplicationData applicationData);
 
     // ----------------------------------------------------------
-    // METHOD 2
+    // METHOD 2/7
     // ----------------------------------------------------------
 
     /**
@@ -61,7 +64,7 @@ public interface ApplicationDataService {
     Double calculateAverageRating(ApplicationCategory category);
 
     // ----------------------------------------------------------
-    // METHOD 3
+    // METHOD 3/8
     // ----------------------------------------------------------
 
     /**
@@ -90,7 +93,7 @@ public interface ApplicationDataService {
                                        LocalDateTime minLastUpdated, boolean multideviceNeeded);
 
     // ----------------------------------------------------------
-    // METHOD 4
+    // METHOD 4/11
     // ----------------------------------------------------------
 
     /**
@@ -110,11 +113,26 @@ public interface ApplicationDataService {
                                                                     LocalDateTime minLastUpdated, boolean multideviceNeeded);
 
     // ----------------------------------------------------------
-    // METHOD 5
+    // METHOD 5/11
     // ----------------------------------------------------------
 
     /**
      * @return the map that counts the installations (values) by category (keys)
      */
     Map<ApplicationCategory, Long> getInstallsByCategory();
+
+    // ----------------------------------------------------------
+    // METHOD 9
+    // ----------------------------------------------------------
+
+    /**
+     * @param minRating         the minimum rating that an app must have to be counted
+     * @param minReviews        the minimum reviews that an app must have to be counted
+     * @param minLastUpdated    the minimum last updated date that an app must have to be counted
+     * @param multideviceNeeded if an app must be multidevice to be counted
+     * @return the app with the most installs that matches the requirements
+     */
+    ApplicationData getMostPopularApplication(ApplicationCategory category, float minRating, int minReviews,
+                                              LocalDateTime minLastUpdated, boolean multideviceNeeded);
+
 }

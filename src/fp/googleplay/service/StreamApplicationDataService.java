@@ -4,10 +4,7 @@ import fp.googleplay.ApplicationCategory;
 import fp.googleplay.ApplicationData;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -76,5 +73,14 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
                         ApplicationData::getCategory,
                         Collectors.summingLong(ApplicationData::getInstalls)
                 ));
+    }
+
+    @Override
+    public ApplicationData getMostPopularApplication(ApplicationCategory category, float minRating, int minReviews,
+                                                     LocalDateTime minLastUpdated, boolean multideviceNeeded) {
+        return this.data.stream()
+                .filter(app -> this.matches(app, minRating, minReviews, -1, minLastUpdated, multideviceNeeded))
+                .max(Comparator.comparingInt(ApplicationData::getInstalls))
+                .orElse(null);
     }
 }
