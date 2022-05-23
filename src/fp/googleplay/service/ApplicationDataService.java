@@ -157,5 +157,5 @@ public interface ApplicationDataService {
     /**
      * @return the last updated application (values) by every category (keys)
      */
-    Map<ApplicationCategory, ApplicationData> getLastUpdatedByCategory();
+    Map<ApplicationCategory, ApplicationData> getLastUpdatedApplicationsByCategory();
 }

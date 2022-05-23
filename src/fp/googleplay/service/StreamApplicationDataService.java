@@ -98,7 +98,7 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
     }
 
     @Override
-    public Map<ApplicationCategory, ApplicationData> getLastUpdatedByCategory() {
+    public Map<ApplicationCategory, ApplicationData> getLastUpdatedApplicationsByCategory() {
         return this.data.stream()
                 .collect(Collectors.toMap(
                         ApplicationData::getCategory,
