@@ -90,7 +90,7 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
     }
 
     @Override
-    public Collection<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews) {
+    public List<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews) {
         return this.data.stream()
                 .filter(app -> app.getCategory().equals(category))
                 .filter(app -> app.getReviews() >= minReviews)

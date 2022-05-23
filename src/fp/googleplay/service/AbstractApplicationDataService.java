@@ -98,7 +98,7 @@ public abstract class AbstractApplicationDataService implements ApplicationDataS
     }
 
     @Override
-    public Collection<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews) {
+    public List<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews) {
         throw new UnsupportedOperationException();
     }
 

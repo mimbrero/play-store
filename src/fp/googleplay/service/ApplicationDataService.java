@@ -145,7 +145,7 @@ public interface ApplicationDataService {
      * @param minReviews the minimum reviews that an app must have to be counted
      * @return the filtered collection sorted by rating (descending)
      */
-    Collection<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews);
+    List<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews);
 
     // ----------------------------------------------------------
     // METHOD 12
