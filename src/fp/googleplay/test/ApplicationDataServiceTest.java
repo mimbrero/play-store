@@ -18,7 +18,7 @@ import java.util.Map;
 import static fp.util.test.Assertions.assertEquals;
 import static fp.util.test.Assertions.assertThat;
 
-public class ApplicationDataServiceTest extends UnitTest {
+public abstract class ApplicationDataServiceTest extends UnitTest {
 
     private final ApplicationDataService service;
     private final List<ApplicationData> mockData;
@@ -92,17 +92,5 @@ public class ApplicationDataServiceTest extends UnitTest {
 
         print("Las aplicaciones de tipo comunicación suman " + installs.get(ApplicationCategory.COMMUNICATION) + " instalaciones.");
         print("Las aplicaciones de tipo entretenimiento suman " + installs.get(ApplicationCategory.ENTERTAINMENT) + " instalaciones.");
-    }
-
-    public static void main(String[] args) {
-        ApplicationDataFactory factory = new ApplicationDataFactoryImpl();
-        ApplicationDataService analyzer = new LoopApplicationDataService();
-
-        try {
-            new ApplicationDataServiceTest(factory, analyzer).init();
-        } catch (IOException e) {
-            System.out.println("Ha habido un error relacionado al archivo CSV para hacer pruebas:");
-            e.printStackTrace();
-        }
     }
 }
