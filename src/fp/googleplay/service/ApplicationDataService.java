@@ -151,6 +151,10 @@ public interface ApplicationDataService {
     // METHOD 12
     // ----------------------------------------------------------
 
+    /**
+     * @param n the number of applications to get
+     * @return the last n applications sorted by last updated (descending)
+     */
     List<ApplicationData> getLastUpdatedApplications(int n);
 
     // ----------------------------------------------------------
