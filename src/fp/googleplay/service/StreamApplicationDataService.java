@@ -5,6 +5,8 @@ import fp.googleplay.ApplicationData;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,6 +24,7 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
 
     /**
      * Creates an instance with the given data.
+     *
      * @param data the data to work with
      */
     public StreamApplicationDataService(Collection<ApplicationData> data) {
@@ -30,6 +33,7 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
 
     /**
      * Creates an instance with the given data.
+     *
      * @param data the data to work with
      */
     public StreamApplicationDataService(Stream<ApplicationData> data) {
@@ -91,5 +95,15 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
                 .filter(app -> app.getReviews() >= minReviews)
                 .sorted(Comparator.comparingDouble(ApplicationData::getRating).reversed())
                 .toList();
+    }
+
+    @Override
+    public Map<ApplicationCategory, ApplicationData> getLastUpdatedByCategory() {
+        return this.data.stream()
+                .collect(Collectors.toMap(
+                        ApplicationData::getCategory,
+                        Function.identity(),
+                        BinaryOperator.maxBy(Comparator.comparing(ApplicationData::getLastUpdated))
+                ));
     }
 }

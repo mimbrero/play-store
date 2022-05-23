@@ -103,6 +103,11 @@ public abstract class AbstractApplicationDataService implements ApplicationDataS
     }
 
     @Override
+    public Map<ApplicationCategory, ApplicationData> getLastUpdatedByCategory() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

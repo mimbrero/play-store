@@ -145,4 +145,17 @@ public interface ApplicationDataService {
      * @return the filtered collection sorted by rating (descending)
      */
     Collection<ApplicationData> filterAndSortByRating(ApplicationCategory category, int minReviews);
+
+    // ----------------------------------------------------------
+    // METHOD 12
+    // ----------------------------------------------------------
+
+    // ----------------------------------------------------------
+    // METHOD 13
+    // ----------------------------------------------------------
+
+    /**
+     * @return the last updated application (values) by every category (keys)
+     */
+    Map<ApplicationCategory, ApplicationData> getLastUpdatedByCategory();
 }
