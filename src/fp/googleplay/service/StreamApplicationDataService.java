@@ -83,6 +83,7 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
     public ApplicationData getMostPopularApplication(ApplicationCategory category, float minRating, int minReviews,
                                                      LocalDateTime minLastUpdated, boolean multideviceNeeded) {
         return this.data.stream()
+                .filter(app -> app.getCategory().equals(category))
                 .filter(app -> this.matches(app, minRating, minReviews, -1, minLastUpdated, multideviceNeeded))
                 .max(Comparator.comparingInt(ApplicationData::getInstalls))
                 .orElse(null);
@@ -117,7 +118,7 @@ public class StreamApplicationDataService extends AbstractApplicationDataService
     @Override
     public SortedMap<ApplicationCategory, List<ApplicationData>> getMostPopularApplicationsByCategory(int n) {
         return this.data.stream()
-                .sorted(Comparator.comparingInt(ApplicationData::getInstalls))
+                .sorted(Comparator.comparingInt(ApplicationData::getInstalls).reversed())
                 .collect(Collectors.groupingBy(
                         ApplicationData::getCategory,
                         TreeMap::new,
